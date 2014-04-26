@@ -1,4 +1,4 @@
-from    ubuntu
+from ubuntu
 run     echo 'deb http://us.archive.ubuntu.com/ubuntu/ precise universe' >> /etc/apt/sources.list
 run     apt-get -y update
 run     apt-get -y upgrade
@@ -8,13 +8,14 @@ run     apt-get -y upgrade
 # ---------------- #
 
 # Install all prerequisites 
-run     apt-get -y install software-properties-common
+run apt-get -y install software-properties-common
 run     add-apt-repository -y ppa:chris-lea/node.js
 run     apt-get -y update
 run     apt-get -y install  python-django-tagging python-simplejson python-memcache \
                             python-ldap python-cairo python-django python-twisted   \
                             python-pysqlite2 python-support python-pip gunicorn     \
-                            supervisor nginx-light nodejs git wget curl openjdk-7-jre
+                            supervisor nginx-light nodejs git wget curl             \ 
+                            openjdk-7-jre build-essential python-dev
 
 # Install Elasticsearch
 run     cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.deb
@@ -24,6 +25,7 @@ run     cd ~ && dpkg -i elasticsearch-1.1.1.deb && rm elasticsearch-1.1.1.deb
 run     mkdir /src && git clone https://github.com/etsy/statsd.git /src/statsd
 
 # Install Whisper, Carbon and Graphite-Web
+run     pip install Twisted==11.1.0
 run     pip install whisper
 run     pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/lib" carbon
 run     pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/webapp" graphite-web
@@ -89,8 +91,5 @@ expose  8125/udp
 # Statsd Management port
 expose  8126
 
-#VOLUME ["/var/lib/elasticsearch"]
-#VOLUME ["/var/lib/graphite/storage/whisper"]
-#VOLUME ["/var/lib/log/supervisor"]
 
 cmd     ["/usr/bin/supervisord"]
