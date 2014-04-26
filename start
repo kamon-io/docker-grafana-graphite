@@ -1,15 +1,7 @@
 #! /bin/bash
 
-docker kill kamon
-docker rm kamon
+docker kill kamon-grafana-dashboard
+docker rm kamon-grafana-dashboard
 
-docker run -d \
-	-v /var/docker/kamon/elastic:/var/lib/elasticsearch \
-	-v /var/docker/kamon/graphite:/var/lib/graphite/storage/whisper \
-	-v /var/docker/kamon/supervisor:/var/log/supervisor \
-	-p 8080:80 \
-  -p 8081:81 \
-  -p 8125:8125/udp \
-  -p 2003:2003/tcp \
-  --name kamon kamon/grafana_graphite 
+docker run -d -p 80:80 -p 8125:8125/udp -p 8126:8126 --name kamon-grafana-dashboard kamon/grafana_graphite 
 
