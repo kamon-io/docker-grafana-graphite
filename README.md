@@ -2,7 +2,7 @@ StatsD + Graphite + Grafana + Kamon Dashboard
 -------
 
 This image contains a sensible default configuration of statsd, graphite and
-carbon-cache. Starting this container will, by default, bind the the following
+grafana. Starting this container will, by default, bind the the following
 host ports:
 
 - `80`: the grafana web interface
