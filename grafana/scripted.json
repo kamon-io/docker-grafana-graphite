@@ -2,23 +2,87 @@
   "title": "Kamon Dashboard",
   "services": {
     "filter": {
-      "list": [],
+      "list": [
+        {
+          "type": "filter",
+          "name": "Application",
+          "query": "stats.timers.*",
+          "includeAll": false,
+          "options": [
+            {
+              "text": "kamon",
+              "value": "kamon"
+            }
+          ],
+          "current": {
+            "text": "kamon",
+            "value": "kamon"
+          }
+        },
+        {
+          "type": "filter",
+          "name": "Host",
+          "query": "stats.timers.*.*",
+          "options": [
+            {
+              "text": "localhost",
+              "value": "localhost"
+            }
+          ],
+          "current": {
+            "text": "localhost",
+            "value": "localhost"
+          }
+        }
+      ],
       "time": {
-        "from": "now-15m",
+        "from": "now-1h",
         "to": "now"
       }
     }
   },
   "rows": [
     {
-      "title": "Row1",
-      "height": "250px",
+      "title": "Actor Metrics Label",
+      "height": "80px",
       "editable": true,
       "collapse": false,
       "collapsable": true,
       "panels": [
         {
+          "error": false,
           "span": 12,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "## Actor Metrics ##",
+          "style": {},
+          "title": "Actor Metrics"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Intro and Processed Count",
+      "height": "350px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "This dashboard gives a simple overview metrics collected by Kamon from your application. By default the pattern in which metrics \nare reported contains the application name (see the application key in kamon-statsd's reference.conf file) and the host name from \nwhich the metrics are being collected. The filters on the upper left side let you select between these two path keys. \n\nFeel free to play with this dashboard, see how the panels are constructed and create your own dashboard according to your needs!",
+          "style": {},
+          "title": "Welcome to the Kamon Example Dashboard!"
+        },
+        {
+          "span": 9,
           "editable": true,
           "type": "graphite",
           "loadingEditor": false,
@@ -37,7 +101,8 @@
             "threshold1": null,
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
           },
           "annotate": {
             "enable": false
@@ -45,7 +110,7 @@
           "resolution": 100,
           "lines": true,
           "fill": 0,
-          "linewidth": 3,
+          "linewidth": 2,
           "points": false,
           "pointradius": 5,
           "bars": false,
@@ -55,9 +120,9 @@
             "values": true,
             "min": true,
             "max": true,
-            "current": true,
-            "total": true,
-            "avg": true
+            "current": false,
+            "total": false,
+            "avg": false
           },
           "percentage": false,
           "zerofill": true,
@@ -69,35 +134,36 @@
           },
           "targets": [
             {
-              "target": "alias(scale(stats.timers.Kamon.ivantopo-notebook.actor.user-simple-service-actor.ProcessingTime.mean,0.001),'Route Processing Time')"
-            },
-            {
-              "target": "alias(stats.timers.Kamon.ivantopo-notebook.actor.user-simple-service-actor.ProcessingTime.count,'# of Requests')"
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.processing-time.count,5)",
+              "hide": false
             }
           ],
           "aliasColors": {},
           "aliasYAxis": {
-            "stats.timers.Kamon.ivantopo-notebook.actor.user-simple-service-actor.ProcessingTime.mean_90": 2,
-            "scale(stats.timers.Kamon.ivantopo-notebook.actor.user-simple-service-actor.ProcessingTime.mean_90,0.001)": 2,
-            "stats.timers.Kamon.Ivan-Topolnjaks-MacBook-Pro.local.actor.user-simple-service-actor.ProcessingTime.mean": 2,
-            "Route Processing Time": 2
+            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90": 2,
+            "scale(stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90,0.001)": 2,
+            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean": 2,
+            "Route Processing Time": 2,
+            "user-simple-service-actor": 1,
+            "user-simple-service-actor processing. time": 2,
+            "user-simple-service-actor processing time": 2
           },
-          "title": "Actors - Metrics",
+          "title": "# of Processed Messages per Actor",
           "leftYAxisLabel": "Message Count",
-          "rightYAxisLabel": "Time"
+          "rightYAxisLabel": "Processing Time"
         }
       ],
       "notice": false
     },
     {
       "title": "Other Stuff",
-      "height": "200px",
+      "height": "250px",
       "editable": true,
       "collapse": false,
       "collapsable": true,
       "panels": [
         {
-          "span": 4,
+          "span": 6,
           "editable": true,
           "type": "graphite",
           "loadingEditor": false,
@@ -141,17 +207,14 @@
           "percentage": false,
           "zerofill": true,
           "nullPointMode": "connected",
-          "steppedLine": false,
+          "steppedLine": true,
           "tooltip": {
             "value_type": "cumulative",
             "query_as_alias": true
           },
           "targets": [
             {
-              "target": "aliasByNode(scale(stats.timers.Kamon.ivantopo-notebook.trace.*.ElapsedTime.mean,0.001),5)"
-            },
-            {
-              "target": "stats.timers.Kamon.ivantopo-notebook.trace.*.ElapsedTime.count"
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.mailbox-size.mean,5)"
             }
           ],
           "aliasColors": {},
@@ -160,8 +223,183 @@
             "OK": 2,
             "OK-Future": 2
           },
-          "title": "Request Times"
+          "title": "Mailbox Size per Actor"
         },
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "µs",
+            "none"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 0,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "null as zero",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.time-in-mailbox.mean,0.001),5)"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {
+            "stats.timers.Kamon.ivantopo-notebook.trace.OK.ElapsedTime.count": 1,
+            "OK": 2,
+            "OK-Future": 2
+          },
+          "title": "Time in Mailbox per Actor"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Actor Processing Time",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 12,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "µs",
+            "µs"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 0,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": true,
+            "min": true,
+            "max": true,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "null as zero",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.processing-time.mean,0.001),5)",
+              "hide": false
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {
+            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90": 2,
+            "scale(stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90,0.001)": 2,
+            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean": 2,
+            "Route Processing Time": 2,
+            "user-simple-service-actor": 1,
+            "user-simple-service-actor processing. time": 2,
+            "user-simple-service-actor processing time": 2
+          },
+          "title": "Processing Time per Actor",
+          "leftYAxisLabel": "Message Count",
+          "rightYAxisLabel": "Processing Time"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Trace Metrics Label",
+      "height": "80px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 12,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "## Trace Metrics ##",
+          "style": {},
+          "title": "Trace Metrics"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Trace Metrics and Intro",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
         {
           "span": 8,
           "editable": true,
@@ -188,13 +426,13 @@
             "enable": false
           },
           "resolution": 100,
-          "lines": false,
+          "lines": true,
           "fill": 0,
-          "linewidth": 1,
+          "linewidth": 2,
           "points": false,
           "pointradius": 5,
-          "bars": true,
-          "stack": true,
+          "bars": false,
+          "stack": false,
           "legend": {
             "show": true,
             "values": false,
@@ -209,17 +447,156 @@
           "nullPointMode": "connected",
           "steppedLine": false,
           "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.count,5)"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "# of Processed Traces"
+        },
+        {
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "Whether your are manually starting/finishing TraceContexts or letting Kamon do it for you in Spray and Play! applications\nthis section contains metrics about those traces!",
+          "style": {},
+          "title": "Trace Metrics"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Latency and Relative Time per Trace",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "µs",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 0,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "null as zero",
+          "steppedLine": false,
+          "tooltip": {
             "value_type": "individual",
             "query_as_alias": true
           },
           "targets": [
             {
-              "target": "stats.timers.Kamon.ivantopo-notebook.trace.*.ElapsedTime.count"
+              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,0.001),5)"
             }
           ],
           "aliasColors": {},
           "aliasYAxis": {},
-          "title": "Hello"
+          "title": "Trace Processing Time"
+        },
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": false,
+          "fill": 0,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": true,
+          "stack": true,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": true,
+          "zerofill": true,
+          "nullPointMode": "null as zero",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "individual",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,5)"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Relative time per Trace"
         }
       ],
       "notice": false
@@ -234,7 +611,7 @@
       "type": "filtering",
       "collapse": false,
       "notice": false,
-      "enable": false
+      "enable": true
     },
     {
       "type": "annotations",
