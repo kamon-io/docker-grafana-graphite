@@ -1,5 +1,5 @@
-from ubuntu
-run     echo 'deb http://us.archive.ubuntu.com/ubuntu/ precise universe' >> /etc/apt/sources.list
+from    ubuntu:14.04
+run     echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty universe' >> /etc/apt/sources.list
 run     apt-get -y update
 run     apt-get -y upgrade
 
@@ -8,7 +8,7 @@ run     apt-get -y upgrade
 #   Installation   #
 # ---------------- #
 
-# Install all prerequisites 
+# Install all prerequisites
 run apt-get -y install software-properties-common
 run     add-apt-repository -y ppa:chris-lea/node.js
 run     apt-get -y update
@@ -21,7 +21,7 @@ run     cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsea
 run     cd ~ && dpkg -i elasticsearch-1.1.1.deb && rm elasticsearch-1.1.1.deb
 
 # Install StatsD
-run     mkdir /src && git clone https://github.com/etsy/statsd.git /src/statsd
+run     mkdir /src && git clone https://github.com/etsy/statsd.git /src/statsd && cd /src/statsd && git checkout v0.7.1
 
 # Install Whisper, Carbon and Graphite-Web
 run     pip install Twisted==11.1.0
@@ -32,8 +32,8 @@ run     pip install --install-option="--prefix=/var/lib/graphite" --install-opti
 
 # Install Grafana
 run     mkdir /src/grafana && cd /src/grafana &&\
-        wget http://grafanarel.s3.amazonaws.com/grafana-1.5.3.tar.gz &&\
-        tar xzvf grafana-1.5.3.tar.gz --strip-components=1 && rm grafana-1.5.3.tar.gz
+        wget http://grafanarel.s3.amazonaws.com/grafana-1.6.1.tar.gz &&\
+        tar xzvf grafana-1.6.1.tar.gz --strip-components=1 && rm grafana-1.6.1.tar.gz
 
 
 # ----------------- #
@@ -53,6 +53,7 @@ add     ./graphite/initial_data.json /var/lib/graphite/webapp/graphite/initial_d
 add     ./graphite/local_settings.py /var/lib/graphite/webapp/graphite/local_settings.py
 add     ./graphite/carbon.conf /var/lib/graphite/conf/carbon.conf
 add     ./graphite/storage-schemas.conf /var/lib/graphite/conf/storage-schemas.conf
+add     ./graphite/storage-aggregation.conf /var/lib/graphite/conf/storage-aggregation.conf
 run     mkdir -p /var/lib/graphite/storage/whisper
 run     touch /var/lib/graphite/storage/graphite.db /var/lib/graphite/storage/index
 run     chown -R www-data /var/lib/graphite/storage
@@ -62,7 +63,7 @@ run     cd /var/lib/graphite/webapp/graphite && python manage.py syncdb --noinpu
 
 # Configure Grafana
 add     ./grafana/config.js /src/grafana/config.js
-add     ./grafana/scripted.json /src/grafana/app/dashboards/default.json
+#add     ./grafana/scripted.json /src/grafana/app/dashboards/default.json
 
 # Configure nginx and supervisord
 add     ./nginx/nginx.conf /etc/nginx/nginx.conf
