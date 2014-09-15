@@ -1,0 +1,68 @@
+diff --git a/src/app/controllers/graphiteTarget.js b/src/app/controllers/graphiteTarget.js
+index 6b74455..4595fef 100644
+--- a/src/app/controllers/graphiteTarget.js
++++ b/src/app/controllers/graphiteTarget.js
+@@ -292,7 +292,7 @@ function (angular, _, config, gfunc, Parser) {
+         this.html = $sce.trustAsHtml("<span style='color: #ECEC09'>" + options.value + "</span>");
+       }
+       else {
+-        this.html = $sce.trustAsHtml(this.value);
++        this.html = $sce.trustAsHtml(decodeURIComponent(this.value));
+       }
+     }
+ 
+diff --git a/src/app/directives/grafanaGraph.js b/src/app/directives/grafanaGraph.js
+index 323db21..95d10b6 100755
+--- a/src/app/directives/grafanaGraph.js
++++ b/src/app/directives/grafanaGraph.js
+@@ -339,7 +339,7 @@ function (angular, $, kbn, moment, _) {
+             if (seriesInfo.alias) {
+               group = '<small style="font-size:0.9em;">' +
+                 '<i class="icon-circle" style="color:'+item.series.color+';"></i>' + ' ' +
+-                seriesInfo.alias +
++                decodeURIComponent(seriesInfo.alias) +
+               '</small><br>';
+             } else {
+               group = kbn.query_color_dot(item.series.color, 15) + ' ';
+diff --git a/src/app/filters/all.js b/src/app/filters/all.js
+index 926051d..b668ecf 100755
+--- a/src/app/filters/all.js
++++ b/src/app/filters/all.js
+@@ -114,4 +114,10 @@ define(['angular', 'jquery', 'lodash', 'moment'], function (angular, $, _, momen
+     };
+   });
+ 
++  module.filter('urlDecode', function() {
++    return function(input) {
++      return decodeURIComponent(input);
++    };
++  });
++
+ });
+\ No newline at end of file
+diff --git a/src/app/panels/filtering/module.html b/src/app/panels/filtering/module.html
+index 96b5751..3c95fbd 100755
+--- a/src/app/panels/filtering/module.html
++++ b/src/app/panels/filtering/module.html
+@@ -17,7 +17,7 @@
+             </a>
+               <ul class="dropdown-menu">
+                 <li ng-repeat="option in filter.options">
+-                  <a ng-click="filterOptionSelected(filter, option)">{{option.text}}</a>
++                  <a ng-click="filterOptionSelected(filter, option)">{{option.text | urlDecode}}</a>
+                 </li>
+               </ul>
+           </li>
+diff --git a/src/app/panels/graph/legend.html b/src/app/panels/graph/legend.html
+index 5524a80..4cecbe0 100755
+--- a/src/app/panels/graph/legend.html
++++ b/src/app/panels/graph/legend.html
+@@ -10,7 +10,7 @@
+     </div>
+     <div class="graph-legend-alias small">
+       <a ng-click="toggleSeries(series, $event)" data-unique="1" data-placement="{{series.yaxis === 2 ? 'bottomRight' : 'bottomLeft'}}">
+-        {{series.alias}}
++        {{series.alias | urlDecode}}
+       </a>
+     </div>
+     <div class="graph-legend-value current small" ng-show="panel.legend.values && panel.legend.current" ng-bind="series.current">
