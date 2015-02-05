@@ -6,7 +6,7 @@ var args = process.argv.slice(2);
 setTimeout( function() {
   args.forEach(function (file_name) {
     var dashboard_file = fs.readFileSync(file_name, "utf8");
-    var dashboard_resource = '/elasticsearch/grafana-dash/dashboard/' + process.argv[2].split('.')[0];
+    var dashboard_resource = '/elasticsearch/grafana-dash/dashboard/' + file_name.split('.')[0];
     var dashboard = JSON.parse(dashboard_file);
 
     http.get({
