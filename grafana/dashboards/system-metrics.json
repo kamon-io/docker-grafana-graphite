@@ -23,7 +23,7 @@
           "type": "text",
           "id": 16,
           "mode": "markdown",
-          "content": "## OS Metrics\n\nKamon provides the following metrics related to the host OS (most of the metrics gathering are achieved using [Sigar][SigarLink])\n\n* Cpu\n* Process Cpu\n* File System\n* Load Average\n* Network\n* Context Switches\n\n\n[SigarLink]: https://support.hyperic.com/display/SIGAR/Home \"Sigar Home\"\n\n",
+          "content": "## OS Metrics\n\n* Kamon provides the following metrics related to the host OS (most of the metrics gathering are achieved using [Sigar][SigarLink])\n[SigarLink]: https://support.hyperic.com/display/SIGAR/Home \"Sigar Home\"\n\n",
           "style": {},
           "links": []
         }
@@ -735,7 +735,7 @@
     },
     {
       "title": "New row",
-      "height": "250px",
+      "height": "25px",
       "editable": true,
       "collapse": false,
       "panels": [
@@ -747,7 +747,7 @@
           "type": "text",
           "id": 15,
           "mode": "markdown",
-          "content": "## JVM Metrics\n\nKamon provides the following metrics related to the JVM\n\n* [Class Loading] [ClassLoadingLink]\n* [Garbage Collection][GarbageCollectionLink]\n* [Heap Memory][HeapMemoryLink]\n* [Non Heap Memory][HeapMemoryLink]\n* [Threads][ThreadsLink]\n\n\n\n\n[ClassLoadingLink]: http://docs.oracle.com/javase/7/docs/api/java/lang/management/ClassLoadingMXBean.html  \"ClassLoading\"\n[GarbageCollectionLink]: http://docs.oracle.com/javase/7/docs/api/java/lang/management/GarbageCollectorMXBean.html  \"GarbageCollection\"\n[HeapMemoryLink]: http://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryMXBean.html  \"Memory\"\n[ThreadsLink]: http://docs.oracle.com/javase/7/docs/api/java/lang/management/ThreadMXBean.html  \"Threads\"\n\n\n\n\n",
+          "content": "## JVM Metrics\n* Kamon provides the following metrics related to the JVM",
           "style": {},
           "links": []
         }
