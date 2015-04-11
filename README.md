@@ -41,3 +41,4 @@ purpose of making your life easier. This should give you an idea of how the dash
 from one of our toy applications:
 
 ![Kamon Dashboard](http://kamon.io/assets/img/kamon-statsd-grafana.png)
+![System Metrics Dashboard](http://kamon.io/assets/img/kamon-system-metrics.png)
