@@ -1,1301 +1,1335 @@
 {
-  "id": null,
-  "title": "System Metrics",
-  "originalTitle": "System Metrics",
-  "tags": [],
-  "style": "dark",
-  "timezone": "browser",
-  "editable": true,
-  "hideControls": false,
-  "sharedCrosshair": false,
-  "rows": [
-    {
-      "title": "New row",
-      "height": "100px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "text",
-          "id": 16,
-          "mode": "markdown",
-          "content": "## OS Metrics\n\n* Kamon provides the following metrics related to the host OS (most of the metrics gathering are achieved using [Sigar][SigarLink])\n[SigarLink]: https://support.hyperic.com/display/SIGAR/Home \"Sigar Home\"\n\n",
-          "style": {},
-          "links": []
-        }
-      ]
+    "annotations": {
+        "list": []
     },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
+    "editable": true,
+    "hideControls": false,
+    "id": null,
+    "nav": [
         {
-          "title": "Network Traffic",
-          "error": false,
-          "span": 8,
-          "editable": true,
-          "type": "graph",
-          "id": 4,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "bytes",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.network.rx-bytes.sum, 'sum'), 'Received')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.network.tx-bytes.sum, 'sum'), 'Transmitted')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        },
-        {
-          "title": "RX-Errors",
-          "error": false,
-          "span": 1,
-          "editable": true,
-          "type": "singlestat",
-          "id": 17,
-          "links": [],
-          "maxDataPoints": 100,
-          "interval": null,
-          "targets": [
-            {
-              "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.rx-errors.sum, 'sum')"
-            }
-          ],
-          "cacheTimeout": null,
-          "format": "short",
-          "prefix": "",
-          "postfix": "",
-          "nullText": null,
-          "valueMaps": [
-            {
-              "value": "null",
-              "op": "=",
-              "text": "N/A"
-            }
-          ],
-          "nullPointMode": "connected",
-          "valueName": "current",
-          "prefixFontSize": "50%",
-          "valueFontSize": "80%",
-          "postfixFontSize": "50%",
-          "thresholds": "",
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "sparkline": {
-            "show": true,
-            "full": true,
-            "lineColor": "rgb(31, 120, 193)",
-            "fillColor": "rgba(31, 118, 189, 0.18)"
-          }
-        },
-        {
-          "title": "RX-Dropped",
-          "error": false,
-          "span": 1,
-          "editable": true,
-          "type": "singlestat",
-          "id": 19,
-          "links": [],
-          "maxDataPoints": 100,
-          "interval": null,
-          "targets": [
-            {
-              "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.rx-dropped.sum, 'sum')"
-            }
-          ],
-          "cacheTimeout": null,
-          "format": "short",
-          "prefix": "",
-          "postfix": "",
-          "nullText": null,
-          "valueMaps": [
-            {
-              "value": "null",
-              "op": "=",
-              "text": "N/A"
-            }
-          ],
-          "nullPointMode": "connected",
-          "valueName": "current",
-          "prefixFontSize": "50%",
-          "valueFontSize": "80%",
-          "postfixFontSize": "50%",
-          "thresholds": "",
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "sparkline": {
-            "show": true,
-            "full": true,
-            "lineColor": "rgb(31, 120, 193)",
-            "fillColor": "rgba(31, 118, 189, 0.18)"
-          }
-        },
-        {
-          "title": "TX-Errors",
-          "error": false,
-          "span": 1,
-          "editable": true,
-          "type": "singlestat",
-          "id": 18,
-          "links": [],
-          "maxDataPoints": 100,
-          "interval": null,
-          "targets": [
-            {
-              "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.tx-errors.sum, 'sum')"
-            }
-          ],
-          "cacheTimeout": null,
-          "format": "short",
-          "prefix": "",
-          "postfix": "",
-          "nullText": null,
-          "valueMaps": [
-            {
-              "value": "null",
-              "op": "=",
-              "text": "N/A"
-            }
-          ],
-          "nullPointMode": "connected",
-          "valueName": "current",
-          "prefixFontSize": "50%",
-          "valueFontSize": "80%",
-          "postfixFontSize": "50%",
-          "thresholds": "",
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "sparkline": {
-            "show": true,
-            "full": true,
-            "lineColor": "rgb(31, 120, 193)",
-            "fillColor": "rgba(31, 118, 189, 0.18)"
-          }
-        },
-        {
-          "title": "TX-Dropped",
-          "error": false,
-          "span": 1,
-          "editable": true,
-          "type": "singlestat",
-          "id": 20,
-          "links": [],
-          "maxDataPoints": 100,
-          "interval": null,
-          "targets": [
-            {
-              "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.tx-dropped.sum, 'sum')"
-            }
-          ],
-          "cacheTimeout": null,
-          "format": "short",
-          "prefix": "",
-          "postfix": "",
-          "nullText": null,
-          "valueMaps": [
-            {
-              "value": "null",
-              "op": "=",
-              "text": "N/A"
-            }
-          ],
-          "nullPointMode": "connected",
-          "valueName": "current",
-          "prefixFontSize": "50%",
-          "valueFontSize": "80%",
-          "postfixFontSize": "50%",
-          "thresholds": "",
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "sparkline": {
-            "show": true,
-            "full": true,
-            "lineColor": "rgb(31, 120, 193)",
-            "fillColor": "rgba(31, 118, 189, 0.18)"
-          }
+            "collapse": false,
+            "enable": true,
+            "notice": false,
+            "now": true,
+            "refresh_intervals": [
+                "5s",
+                "10s",
+                "30s",
+                "1m",
+                "5m",
+                "15m",
+                "30m",
+                "1h",
+                "2h",
+                "1d"
+            ],
+            "status": "Stable",
+            "time_options": [
+                "5m",
+                "15m",
+                "1h",
+                "6h",
+                "12h",
+                "24h",
+                "2d",
+                "7d",
+                "30d"
+            ],
+            "type": "timepicker"
         }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "System CPU",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 1,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "percent",
-            "short"
-          ],
-          "grid": {
-            "leftMax": 102,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true,
-            "hideEmpty": false,
-            "sortDesc": null,
-            "sort": null
-          },
-          "nullPointMode": "null",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "individual",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-user.mean_99, 'User')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-system.mean_99, 'System')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-idle.mean_99, 'Idle')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-stolen.mean_99, 'Stolen')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-wait.mean_99, 'Wait')"
-            }
-          ],
-          "aliasColors": {
-            "User %": "#1F78C1",
-            "System %": "#BF1B00"
-          },
-          "seriesOverrides": [],
-          "links": [],
-          "leftYAxisLabel": ""
-        },
-        {
-          "title": "Process CPU",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 2,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "percent",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": true,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "rightSide": true,
-            "alignAsTable": true
-          },
-          "nullPointMode": "null",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "individual",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(consolidateBy(stats.timers.*.$Host.system-metric.process-cpu.process-user-cpu.upper, 'max'), 'User')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.*.$Host.system-metric.process-cpu.process-system-cpu.upper, 'max'), 'System')"
-            }
-          ],
-          "aliasColors": {
-            "User %": "#1F78C1",
-            "System %": "#BF1B00"
-          },
-          "seriesOverrides": [],
-          "links": [],
-          "leftYAxisLabel": ""
-        }
-      ]
-    },
-    {
-      "title": "Row1",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "System Memory",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 3,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "bytes",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": 0,
-            "rightMin": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": true,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "hideEmpty": false,
-            "rightSide": true,
-            "alignAsTable": true
-          },
-          "nullPointMode": "null",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "individual",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.memory.memory-used.upper, 'Used Memory')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.memory.memory-cache-and-buffer.upper, 'Cache and Buffers')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.memory.memory-total.upper, 'Total Memory')"
-            }
-          ],
-          "aliasColors": {
-            "Total Memory": "#890F02"
-          },
-          "seriesOverrides": [
-            {
-              "alias": "Total Memory",
-              "stack": false
-            }
-          ],
-          "links": []
-        },
-        {
-          "title": "File System Usage",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 5,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "bytes",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.file-system.file-system-reads.sum, 'sum'), 'Reads')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.file-system.file-system-writes.sum, 'sum'), 'Writes')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "Context Switches",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 10,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "short",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.context-switches.context-switches-global.sum, 'sum'), 'Global')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.context-switches.context-switches-process-voluntary.sum, 'sum'), 'Voluntary for the Application')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.context-switches.context-switches-process-non-voluntary.sum, 'sum'), 'non-Voluntary for the Application')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        },
-        {
-          "title": "Load Average",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 6,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "none",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.load-average.one-minute.mean_99, 'One Minute')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.load-average.five-minutes.mean_99, 'Five Minutes')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.load-average.fifteen-minutes.mean_99, 'Fifteen Minutes')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "25px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "text",
-          "id": 15,
-          "mode": "markdown",
-          "content": "## JVM Metrics\n* Kamon provides the following metrics related to the JVM",
-          "style": {},
-          "links": []
-        }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "Garbage Collection Time",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 12,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "ms",
-            "ms"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-scavenge-garbage-collector.garbage-collection-count.sum, 'sum'), 'NewGen Collections')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-marksweep-garbage-collector.garbage-collection-time.sum, 'sum'), 'OldGen Total Time')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833",
-            "NewGen Collections": "#EAB839",
-            "OldGen Total Time": "#7EB26D"
-          },
-          "seriesOverrides": [
-            {
-              "alias": "stats.timers.kamon.ivantopo-desktop.system-metric.ps-scavenge-garbage-collector.garbage-collection-time.sum",
-              "yaxis": 2
-            },
-            {
-              "alias": "NewGen Total Time",
-              "yaxis": 2
-            },
-            {
-              "alias": "OldGen Total Time",
-              "yaxis": 1
-            }
-          ],
-          "links": []
-        },
-        {
-          "title": "Garbage Collection Count",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 11,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "none",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true,
-            "sortDesc": true,
-            "sort": "current"
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-marksweep-garbage-collector.garbage-collection-count.sum, 'sum'), 'OldGen Collections')"
-            },
-            {
-              "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-scavenge-garbage-collector.garbage-collection-count.sum, 'sum'), 'NewGen Collections')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [
-            {
-              "alias": "stats.timers.kamon.ivantopo-desktop.system-metric.ps-scavenge-garbage-collector.garbage-collection-time.sum",
-              "yaxis": 2
-            },
-            {
-              "alias": "NewGen Total Time",
-              "yaxis": 2
-            },
-            {
-              "alias": "OldGen Total Time",
-              "yaxis": 2
-            }
-          ],
-          "links": []
-        }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "Heap",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 8,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "bytes",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.heap-memory.heap-max.upper, 'Max Heap')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.heap-memory.heap-used.upper, 'Used Heap')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.heap-memory.heap-committed.upper, 'Committed Heap')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        },
-        {
-          "title": "Non Heap Memory",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 9,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "bytes",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.non-heap-memory.non-heap-max.upper, 'Max')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.non-heap-memory.non-heap-committed.upper, 'Committed')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.non-heap-memory.non-heap-used.upper, 'Used')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "Threads",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 7,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "none",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.threads.thread-count.upper, 'Thread Count')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.threads.daemon-thread-count.upper, 'Daemon Threads')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.threads.peak-thread-count.upper, 'Peak')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        },
-        {
-          "title": "Class Loading",
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "id": 13,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "none",
-            "short"
-          ],
-          "grid": {
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "lines": true,
-          "fill": 1,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false,
-            "alignAsTable": true,
-            "rightSide": true
-          },
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "shared": true
-          },
-          "targets": [
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.class-loading.classes-currently-loaded.upper, 'Currently Loaded Classes')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.class-loading.classes-loaded.upper, 'Loaded Classes')"
-            },
-            {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.class-loading.classes-unloaded.upper, 'Unloaded Classes')"
-            }
-          ],
-          "aliasColors": {
-            "Transmitted": "#BF1B00",
-            "Received": "#3F6833"
-          },
-          "seriesOverrides": [],
-          "links": []
-        }
-      ]
-    }
-  ],
-  "nav": [
-    {
-      "type": "timepicker",
-      "enable": true,
-      "status": "Stable",
-      "time_options": [
-        "5m",
-        "15m",
-        "1h",
-        "6h",
-        "12h",
-        "24h",
-        "2d",
-        "7d",
-        "30d"
-      ],
-      "refresh_intervals": [
-        "5s",
-        "10s",
-        "30s",
-        "1m",
-        "5m",
-        "15m",
-        "30m",
-        "1h",
-        "2h",
-        "1d"
-      ],
-      "now": true,
-      "collapse": false,
-      "notice": false
-    }
-  ],
-  "time": {
-    "from": "now-5m",
-    "to": "now"
-  },
-  "templating": {
-    "list": [
-      {
-        "type": "query",
-        "datasource": null,
-        "refresh_on_load": false,
-        "name": "Application",
-        "options": [
-          {
-            "text": "kamon",
-            "value": "kamon"
-          }
-        ],
-        "includeAll": false,
-        "allFormat": "glob",
-        "query": "stats.timers.*",
-        "current": {
-          "text": "kamon",
-          "value": "kamon"
-        },
-        "refresh": true
-      },
-      {
-        "type": "query",
-        "datasource": null,
-        "refresh_on_load": false,
-        "name": "Host",
-        "options": [
-          {
-            "text": "fedora",
-            "value": "fedora"
-          }
-        ],
-        "includeAll": false,
-        "allFormat": "glob",
-        "query": "stats.timers.*.*",
-        "current": {
-          "text": "fedora",
-          "value": "fedora"
-        },
-        "refresh": true
-      }
     ],
-    "enable": true
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "5s",
-  "version": 6,
-  "hideAllLegends": false
+    "originalTitle": "System Metrics",
+    "refresh": "5s",
+    "rows": [
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "100px",
+            "panels": [
+                {
+                    "content": "## OS Metrics\n\n* Kamon provides the following metrics related to the host OS (most of the metrics gathering are achieved using [Sigar][SigarLink])\n[SigarLink]: https://support.hyperic.com/display/SIGAR/Home \"Sigar Home\"\n\n",
+                    "editable": true,
+                    "error": false,
+                    "id": 16,
+                    "links": [],
+                    "mode": "markdown",
+                    "span": 12,
+                    "style": {},
+                    "title": "",
+                    "type": "text"
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 4,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 8,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.network.rx-bytes.sum, 'sum'), 'Received')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.network.tx-bytes.sum, 'sum'), 'Transmitted')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Network Traffic",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "bytes",
+                        "short"
+                    ]
+                },
+                {
+                    "cacheTimeout": null,
+                    "colorBackground": false,
+                    "colorValue": false,
+                    "colors": [
+                        "rgba(50, 172, 45, 0.97)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(245, 54, 54, 0.9)"
+                    ],
+                    "editable": true,
+                    "error": false,
+                    "format": "short",
+                    "id": 17,
+                    "interval": null,
+                    "links": [],
+                    "maxDataPoints": 100,
+                    "nullPointMode": "connected",
+                    "nullText": null,
+                    "postfix": "",
+                    "postfixFontSize": "50%",
+                    "prefix": "",
+                    "prefixFontSize": "50%",
+                    "span": 1,
+                    "sparkline": {
+                        "fillColor": "rgba(31, 118, 189, 0.18)",
+                        "full": true,
+                        "lineColor": "rgb(31, 120, 193)",
+                        "show": true
+                    },
+                    "targets": [
+                        {
+                            "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.rx-errors.sum, 'sum')"
+                        }
+                    ],
+                    "thresholds": "",
+                    "title": "RX-Errors",
+                    "type": "singlestat",
+                    "valueFontSize": "80%",
+                    "valueMaps": [
+                        {
+                            "op": "=",
+                            "text": "N/A",
+                            "value": "null"
+                        }
+                    ],
+                    "valueName": "current"
+                },
+                {
+                    "cacheTimeout": null,
+                    "colorBackground": false,
+                    "colorValue": false,
+                    "colors": [
+                        "rgba(50, 172, 45, 0.97)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(245, 54, 54, 0.9)"
+                    ],
+                    "editable": true,
+                    "error": false,
+                    "format": "short",
+                    "id": 19,
+                    "interval": null,
+                    "links": [],
+                    "maxDataPoints": 100,
+                    "nullPointMode": "connected",
+                    "nullText": null,
+                    "postfix": "",
+                    "postfixFontSize": "50%",
+                    "prefix": "",
+                    "prefixFontSize": "50%",
+                    "span": 1,
+                    "sparkline": {
+                        "fillColor": "rgba(31, 118, 189, 0.18)",
+                        "full": true,
+                        "lineColor": "rgb(31, 120, 193)",
+                        "show": true
+                    },
+                    "targets": [
+                        {
+                            "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.rx-dropped.sum, 'sum')"
+                        }
+                    ],
+                    "thresholds": "",
+                    "title": "RX-Dropped",
+                    "type": "singlestat",
+                    "valueFontSize": "80%",
+                    "valueMaps": [
+                        {
+                            "op": "=",
+                            "text": "N/A",
+                            "value": "null"
+                        }
+                    ],
+                    "valueName": "current"
+                },
+                {
+                    "cacheTimeout": null,
+                    "colorBackground": false,
+                    "colorValue": false,
+                    "colors": [
+                        "rgba(50, 172, 45, 0.97)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(245, 54, 54, 0.9)"
+                    ],
+                    "editable": true,
+                    "error": false,
+                    "format": "short",
+                    "id": 18,
+                    "interval": null,
+                    "links": [],
+                    "maxDataPoints": 100,
+                    "nullPointMode": "connected",
+                    "nullText": null,
+                    "postfix": "",
+                    "postfixFontSize": "50%",
+                    "prefix": "",
+                    "prefixFontSize": "50%",
+                    "span": 1,
+                    "sparkline": {
+                        "fillColor": "rgba(31, 118, 189, 0.18)",
+                        "full": true,
+                        "lineColor": "rgb(31, 120, 193)",
+                        "show": true
+                    },
+                    "targets": [
+                        {
+                            "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.tx-errors.sum, 'sum')"
+                        }
+                    ],
+                    "thresholds": "",
+                    "title": "TX-Errors",
+                    "type": "singlestat",
+                    "valueFontSize": "80%",
+                    "valueMaps": [
+                        {
+                            "op": "=",
+                            "text": "N/A",
+                            "value": "null"
+                        }
+                    ],
+                    "valueName": "current"
+                },
+                {
+                    "cacheTimeout": null,
+                    "colorBackground": false,
+                    "colorValue": false,
+                    "colors": [
+                        "rgba(50, 172, 45, 0.97)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(245, 54, 54, 0.9)"
+                    ],
+                    "editable": true,
+                    "error": false,
+                    "format": "short",
+                    "id": 20,
+                    "interval": null,
+                    "links": [],
+                    "maxDataPoints": 100,
+                    "nullPointMode": "connected",
+                    "nullText": null,
+                    "postfix": "",
+                    "postfixFontSize": "50%",
+                    "prefix": "",
+                    "prefixFontSize": "50%",
+                    "span": 1,
+                    "sparkline": {
+                        "fillColor": "rgba(31, 118, 189, 0.18)",
+                        "full": true,
+                        "lineColor": "rgb(31, 120, 193)",
+                        "show": true
+                    },
+                    "targets": [
+                        {
+                            "target": "consolidateBy(stats.timers.$Application.$Host.system-metric.network.tx-dropped.sum, 'sum')"
+                        }
+                    ],
+                    "thresholds": "",
+                    "title": "TX-Dropped",
+                    "type": "singlestat",
+                    "valueFontSize": "80%",
+                    "valueMaps": [
+                        {
+                            "op": "=",
+                            "text": "N/A",
+                            "value": "null"
+                        }
+                    ],
+                    "valueName": "current"
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "System %": "#BF1B00",
+                        "User %": "#1F78C1"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": 102,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 1,
+                    "leftYAxisLabel": "",
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "hideEmpty": false,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "sort": null,
+                        "sortDesc": null,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-user.mean_99, 'User')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-system.mean_99, 'System')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-idle.mean_99, 'Idle')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-stolen.mean_99, 'Stolen')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.cpu.cpu-wait.mean_99, 'Wait')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "System CPU",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "percent",
+                        "short"
+                    ]
+                },
+                {
+                    "aliasColors": {
+                        "System %": "#BF1B00",
+                        "User %": "#1F78C1"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 2,
+                    "leftYAxisLabel": "",
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": true,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(consolidateBy(stats.timers.*.$Host.system-metric.process-cpu.process-user-cpu.upper, 'max'), 'User')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.*.$Host.system-metric.process-cpu.process-system-cpu.upper, 'max'), 'System')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Process CPU",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "percent",
+                        "short"
+                    ]
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Total Memory": "#890F02"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": 0,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": 0,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)",
+                        "thresholdLine": false
+                    },
+                    "id": 3,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "hideEmpty": false,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [
+                        {
+                            "alias": "Total Memory",
+                            "stack": false
+                        }
+                    ],
+                    "span": 6,
+                    "stack": true,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.memory.memory-used.upper, 'Used Memory')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.memory.memory-cache-and-buffer.upper, 'Cache and Buffers')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.memory.memory-total.upper, 'Total Memory')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "System Memory",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "bytes",
+                        "short"
+                    ]
+                },
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 5,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.file-system.file-system-reads.sum, 'sum'), 'Reads')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.file-system.file-system-writes.sum, 'sum'), 'Writes')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "File System Usage",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "bytes",
+                        "short"
+                    ]
+                }
+            ],
+            "title": "Row1"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 10,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.context-switches.context-switches-global.sum, 'sum'), 'Global')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.context-switches.context-switches-process-voluntary.sum, 'sum'), 'Voluntary for the Application')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.context-switches.context-switches-process-non-voluntary.sum, 'sum'), 'non-Voluntary for the Application')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Context Switches",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "short",
+                        "short"
+                    ]
+                },
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 6,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.load-average.one-minute.mean_99, 'One Minute')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.load-average.five-minutes.mean_99, 'Five Minutes')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.load-average.fifteen-minutes.mean_99, 'Fifteen Minutes')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Load Average",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "none",
+                        "short"
+                    ]
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "25px",
+            "panels": [
+                {
+                    "content": "## JVM Metrics\n* Kamon provides the following metrics related to the JVM",
+                    "editable": true,
+                    "error": false,
+                    "id": 15,
+                    "links": [],
+                    "mode": "markdown",
+                    "span": 12,
+                    "style": {},
+                    "title": "",
+                    "type": "text"
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "NewGen Collections": "#EAB839",
+                        "OldGen Total Time": "#7EB26D",
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 12,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [
+                        {
+                            "alias": "stats.timers.kamon.ivantopo-desktop.system-metric.ps-scavenge-garbage-collector.garbage-collection-time.sum",
+                            "yaxis": 2
+                        },
+                        {
+                            "alias": "NewGen Total Time",
+                            "yaxis": 2
+                        },
+                        {
+                            "alias": "OldGen Total Time",
+                            "yaxis": 1
+                        }
+                    ],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-scavenge-garbage-collector.garbage-collection-count.sum, 'sum'), 'NewGen Collections')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-marksweep-garbage-collector.garbage-collection-time.sum, 'sum'), 'OldGen Total Time')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Garbage Collection Time",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "ms",
+                        "ms"
+                    ]
+                },
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 11,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "sort": "current",
+                        "sortDesc": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [
+                        {
+                            "alias": "stats.timers.kamon.ivantopo-desktop.system-metric.ps-scavenge-garbage-collector.garbage-collection-time.sum",
+                            "yaxis": 2
+                        },
+                        {
+                            "alias": "NewGen Total Time",
+                            "yaxis": 2
+                        },
+                        {
+                            "alias": "OldGen Total Time",
+                            "yaxis": 2
+                        }
+                    ],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-marksweep-garbage-collector.garbage-collection-count.sum, 'sum'), 'OldGen Collections')"
+                        },
+                        {
+                            "target": "alias(consolidateBy(stats.timers.$Application.$Host.system-metric.ps-scavenge-garbage-collector.garbage-collection-count.sum, 'sum'), 'NewGen Collections')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Garbage Collection Count",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "none",
+                        "short"
+                    ]
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 8,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.heap-max.upper, 'Max Heap')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.heap-used.upper, 'Used Heap')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.heap-committed.upper, 'Committed Heap')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Heap",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "bytes",
+                        "short"
+                    ]
+                },
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 9,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.non-heap-max.upper, 'Max')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.non-heap-committed.upper, 'Committed')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.non-heap-used.upper, 'Used')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Non Heap Memory",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "bytes",
+                        "short"
+                    ]
+                }
+            ],
+            "title": "New row"
+        },
+        {
+            "collapse": false,
+            "editable": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 7,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.threads.thread-count.upper, 'Thread Count')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.threads.daemon-thread-count.upper, 'Daemon Threads')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.threads.peak-thread-count.upper, 'Peak')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Threads",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "none",
+                        "short"
+                    ]
+                },
+                {
+                    "aliasColors": {
+                        "Received": "#3F6833",
+                        "Transmitted": "#BF1B00"
+                    },
+                    "bars": false,
+                    "datasource": null,
+                    "editable": true,
+                    "error": false,
+                    "fill": 1,
+                    "grid": {
+                        "leftLogBase": 1,
+                        "leftMax": null,
+                        "leftMin": null,
+                        "rightLogBase": 1,
+                        "rightMax": null,
+                        "rightMin": null,
+                        "threshold1": null,
+                        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                        "threshold2": null,
+                        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                    },
+                    "id": 13,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "connected",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.class-loading.classes-currently-loaded.upper, 'Currently Loaded Classes')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.class-loading.classes-loaded.upper, 'Loaded Classes')"
+                        },
+                        {
+                            "target": "alias(stats.timers.$Application.$Host.system-metric.class-loading.classes-unloaded.upper, 'Unloaded Classes')"
+                        }
+                    ],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Class Loading",
+                    "tooltip": {
+                        "shared": true,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "x-axis": true,
+                    "y-axis": true,
+                    "y_formats": [
+                        "none",
+                        "short"
+                    ]
+                }
+            ],
+            "title": "New row"
+        }
+    ],
+    "schemaVersion": 6,
+    "sharedCrosshair": false,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "enable": true,
+        "list": [
+            {
+                "allFormat": "glob",
+                "datasource": null,
+                "includeAll": false,
+                "name": "Application",
+                "options": [],
+                "query": "stats.timers.*",
+                "refresh": true,
+                "refresh_on_load": false,
+                "type": "query"
+            },
+            {
+                "allFormat": "glob",
+                "datasource": null,
+                "includeAll": false,
+                "name": "Host",
+                "options": [],
+                "query": "stats.timers.*.*",
+                "refresh": true,
+                "refresh_on_load": false,
+                "type": "query"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-5m",
+        "to": "now"
+    },
+    "timezone": "browser",
+    "title": "System Metrics",
+    "version": 0
 }
