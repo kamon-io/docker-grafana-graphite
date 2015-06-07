@@ -1,46 +1,17 @@
 {
+  "id": null,
   "title": "Kamon Dashboard",
-  "services": {
-    "filter": {
-      "list": [
-        {
-          "type": "filter",
-          "name": "Application",
-          "query": "stats.timers.*",
-          "includeAll": false,
-          "options": [
-            {
-              "text": "kamon",
-              "value": "kamon"
-            }
-          ],
-          "current": {
-            "text": "kamon",
-            "value": "kamon"
-          }
-        },
-        {
-          "type": "filter",
-          "name": "Host",
-          "query": "stats.timers.*.*",
-          "options": [
-            {
-              "text": "localhost",
-              "value": "localhost"
-            }
-          ],
-          "current": {
-            "text": "localhost",
-            "value": "localhost"
-          }
-        }
-      ],
-      "time": {
-        "from": "now-1h",
-        "to": "now"
-      }
-    }
-  },
+  "originalTitle": "Kamon Dashboard",
+  "tags": [
+    "kamon",
+    "metrics",
+    "actors"
+  ],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": false,
+  "sharedCrosshair": false,
   "rows": [
     {
       "title": "Actor Metrics Label",
@@ -58,7 +29,8 @@
           "mode": "markdown",
           "content": "## Actor Metrics ##",
           "style": {},
-          "title": "Actor Metrics"
+          "title": "Actor Metrics",
+          "id": 1
         }
       ],
       "notice": false
@@ -79,12 +51,13 @@
           "mode": "markdown",
           "content": "This dashboard gives a simple overview metrics collected by Kamon from your application. By default the pattern in which metrics \nare reported contains the application name (see the application key in kamon-statsd's reference.conf file) and the host name from \nwhich the metrics are being collected. The filters on the upper left side let you select between these two path keys. \n\nFeel free to play with this dashboard, see how the panels are constructed and create your own dashboard according to your needs!",
           "style": {},
-          "title": "Welcome to the Kamon Example Dashboard!"
+          "title": "Welcome to the Kamon Example Dashboard!",
+          "id": 2
         },
         {
           "span": 9,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -92,7 +65,7 @@
           "y-axis": true,
           "scale": 1,
           "y_formats": [
-            "short",
+            "ns",
             "µs"
           ],
           "grid": {
@@ -102,7 +75,11 @@
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false
+            "thresholdLine": false,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -130,27 +107,26 @@
           "steppedLine": false,
           "tooltip": {
             "value_type": "cumulative",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.processing-time.count,5)",
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.processing-time.upper_99, 5)",
               "hide": false
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {
-            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90": 2,
-            "scale(stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90,0.001)": 2,
-            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean": 2,
-            "Route Processing Time": 2,
-            "user-simple-service-actor": 1,
-            "user-simple-service-actor processing. time": 2,
-            "user-simple-service-actor processing time": 2
-          },
           "title": "# of Processed Messages per Actor",
           "leftYAxisLabel": "Message Count",
-          "rightYAxisLabel": "Processing Time"
+          "rightYAxisLabel": "Processing Time",
+          "id": 3,
+          "seriesOverrides": [
+            {
+              "alias": "user-simple-service-actor processing time",
+              "yaxis": 2
+            }
+          ]
         }
       ],
       "notice": false
@@ -165,7 +141,7 @@
         {
           "span": 6,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -182,7 +158,11 @@
             "threshold1": null,
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -210,25 +190,28 @@
           "steppedLine": true,
           "tooltip": {
             "value_type": "cumulative",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.mailbox-size.mean,5)"
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.mailbox-size.mean, 5)"
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {
-            "stats.timers.Kamon.ivantopo-notebook.trace.OK.ElapsedTime.count": 1,
-            "OK": 2,
-            "OK-Future": 2
-          },
-          "title": "Mailbox Size per Actor"
+          "title": "Mailbox Size per Actor",
+          "id": 4,
+          "seriesOverrides": [
+            {
+              "alias": "OK-Future",
+              "yaxis": 2
+            }
+          ]
         },
         {
           "span": 6,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -236,7 +219,7 @@
           "y-axis": true,
           "scale": 1,
           "y_formats": [
-            "µs",
+            "ns",
             "none"
           ],
           "grid": {
@@ -245,7 +228,11 @@
             "threshold1": null,
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -273,20 +260,23 @@
           "steppedLine": false,
           "tooltip": {
             "value_type": "cumulative",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
-              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.time-in-mailbox.mean,0.001),5)"
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.time-in-mailbox.upper_99, 5)"
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {
-            "stats.timers.Kamon.ivantopo-notebook.trace.OK.ElapsedTime.count": 1,
-            "OK": 2,
-            "OK-Future": 2
-          },
-          "title": "Time in Mailbox per Actor"
+          "title": "Time in Mailbox per Actor",
+          "id": 5,
+          "seriesOverrides": [
+            {
+              "alias": "OK-Future",
+              "yaxis": 2
+            }
+          ]
         }
       ],
       "notice": false
@@ -301,7 +291,7 @@
         {
           "span": 12,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -309,7 +299,7 @@
           "y-axis": true,
           "scale": 1,
           "y_formats": [
-            "µs",
+            "ns",
             "µs"
           ],
           "grid": {
@@ -319,7 +309,11 @@
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false
+            "thresholdLine": false,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -347,27 +341,26 @@
           "steppedLine": false,
           "tooltip": {
             "value_type": "cumulative",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
-              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.processing-time.mean,0.001),5)",
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.processing-time.upper_98, 5)",
               "hide": false
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {
-            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90": 2,
-            "scale(stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean_90,0.001)": 2,
-            "stats.timers.kamon.localhost.actor.user-simple-service-actor.processing-time.mean": 2,
-            "Route Processing Time": 2,
-            "user-simple-service-actor": 1,
-            "user-simple-service-actor processing. time": 2,
-            "user-simple-service-actor processing time": 2
-          },
           "title": "Processing Time per Actor",
           "leftYAxisLabel": "Message Count",
-          "rightYAxisLabel": "Processing Time"
+          "rightYAxisLabel": "Processing Time",
+          "id": 6,
+          "seriesOverrides": [
+            {
+              "alias": "user-simple-service-actor processing time",
+              "yaxis": 2
+            }
+          ]
         }
       ],
       "notice": false
@@ -388,7 +381,8 @@
           "mode": "markdown",
           "content": "## Trace Metrics ##",
           "style": {},
-          "title": "Trace Metrics"
+          "title": "Trace Metrics",
+          "id": 7
         }
       ],
       "notice": false
@@ -403,7 +397,7 @@
         {
           "span": 8,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -420,7 +414,11 @@
             "threshold1": null,
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -448,7 +446,8 @@
           "steppedLine": false,
           "tooltip": {
             "value_type": "cumulative",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
@@ -456,8 +455,9 @@
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "# of Processed Traces"
+          "title": "# of Processed Traces",
+          "id": 8,
+          "seriesOverrides": []
         },
         {
           "error": false,
@@ -468,7 +468,8 @@
           "mode": "markdown",
           "content": "Whether your are manually starting/finishing TraceContexts or letting Kamon do it for you in Spray and Play! applications\nthis section contains metrics about those traces!",
           "style": {},
-          "title": "Trace Metrics"
+          "title": "Trace Metrics",
+          "id": 9
         }
       ],
       "notice": false
@@ -483,7 +484,7 @@
         {
           "span": 6,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -491,7 +492,7 @@
           "y-axis": true,
           "scale": 1,
           "y_formats": [
-            "µs",
+            "ns",
             "short"
           ],
           "grid": {
@@ -500,7 +501,11 @@
             "threshold1": null,
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -528,21 +533,23 @@
           "steppedLine": false,
           "tooltip": {
             "value_type": "individual",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
-              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,0.001),5)"
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.upper_98, 5)"
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "Trace Processing Time"
+          "title": "Trace Processing Time",
+          "id": 10,
+          "seriesOverrides": []
         },
         {
           "span": 6,
           "editable": true,
-          "type": "graphite",
+          "type": "graph",
           "loadingEditor": false,
           "datasource": null,
           "renderer": "flot",
@@ -559,7 +566,11 @@
             "threshold1": null,
             "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null
           },
           "annotate": {
             "enable": false
@@ -587,7 +598,8 @@
           "steppedLine": false,
           "tooltip": {
             "value_type": "individual",
-            "query_as_alias": true
+            "query_as_alias": true,
+            "shared": false
           },
           "targets": [
             {
@@ -595,27 +607,12 @@
             }
           ],
           "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "Relative time per Trace"
+          "title": "Relative time per Trace",
+          "id": 11,
+          "seriesOverrides": []
         }
       ],
       "notice": false
-    }
-  ],
-  "editable": true,
-  "failover": false,
-  "panel_hints": true,
-  "style": "dark",
-  "pulldowns": [
-    {
-      "type": "filtering",
-      "collapse": false,
-      "notice": false,
-      "enable": true
-    },
-    {
-      "type": "annotations",
-      "enable": false
     }
   ],
   "nav": [
@@ -651,25 +648,57 @@
       "now": true
     }
   ],
-  "loader": {
-    "save_gist": false,
-    "save_elasticsearch": true,
-    "save_local": true,
-    "save_default": true,
-    "save_temp": true,
-    "save_temp_ttl_enable": true,
-    "save_temp_ttl": "30d",
-    "load_gist": false,
-    "load_elasticsearch": true,
-    "load_elasticsearch_size": 20,
-    "load_local": false,
-    "hide": false
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "type": "query",
+        "name": "Application",
+        "query": "stats.timers.*",
+        "includeAll": false,
+        "options": [
+          {
+            "text": "kamon",
+            "value": "kamon"
+          }
+        ],
+        "datasource": null,
+        "allFormat": "glob",
+        "refresh": true,
+        "current": {
+          "text": "kamon",
+          "value": "kamon"
+        }
+      },
+      {
+        "type": "query",
+        "name": "Host",
+        "query": "stats.timers.*.*",
+        "options": [
+          {
+            "text": "ivantopo-desktop",
+            "value": "ivantopo-desktop"
+          }
+        ],
+        "datasource": null,
+        "allFormat": "glob",
+        "refresh": true,
+        "current": {
+          "text": "ivantopo-desktop",
+          "value": "ivantopo-desktop"
+        }
+      }
+    ],
+    "enable": true
+  },
+  "annotations": {
+    "enable": false,
+    "list": []
   },
   "refresh": "5s",
-  "tags": [
-    "kamon",
-    "metrics",
-    "actors"
-  ],
-  "timezone": "browser"
+  "version": 6,
+  "hideAllLegends": false
 }
