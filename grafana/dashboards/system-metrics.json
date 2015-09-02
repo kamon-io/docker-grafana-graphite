@@ -979,13 +979,13 @@
           },
           "targets": [
             {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.heap-memory.heap-max.upper, 'Max Heap')"
+              "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.heap-max.upper, 'Max Heap')"
             },
             {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.heap-memory.heap-used.upper, 'Used Heap')"
+              "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.heap-used.upper, 'Used Heap')"
             },
             {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.heap-memory.heap-committed.upper, 'Committed Heap')"
+              "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.heap-committed.upper, 'Committed Heap')"
             }
           ],
           "aliasColors": {
@@ -1047,13 +1047,13 @@
           },
           "targets": [
             {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.non-heap-memory.non-heap-max.upper, 'Max')"
+              "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.non-heap-max.upper, 'Max')"
             },
             {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.non-heap-memory.non-heap-committed.upper, 'Committed')"
+              "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.non-heap-committed.upper, 'Committed')"
             },
             {
-              "target": "alias(stats.timers.$Application.$Host.system-metric.non-heap-memory.non-heap-used.upper, 'Used')"
+              "target": "alias(stats.timers.$Application.$Host.system-metric.jmx-memory.non-heap-used.upper, 'Used')"
             }
           ],
           "aliasColors": {
