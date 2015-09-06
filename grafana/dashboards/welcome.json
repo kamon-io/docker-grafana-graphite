@@ -1,5 +1,4 @@
 {
-  "id": null,
   "title": "Kamon Dashboard",
   "originalTitle": "Kamon Dashboard",
   "tags": [
@@ -14,625 +13,641 @@
   "sharedCrosshair": false,
   "rows": [
     {
-      "title": "Actor Metrics Label",
-      "height": "80px",
-      "editable": true,
-      "collapse": false,
       "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "80px",
+      "notice": false,
       "panels": [
         {
-          "error": false,
-          "span": 12,
+          "content": "## Actor Metrics ##",
           "editable": true,
-          "type": "text",
+          "error": false,
+          "id": 1,
           "loadingEditor": false,
           "mode": "markdown",
-          "content": "## Actor Metrics ##",
+          "span": 12,
           "style": {},
           "title": "Actor Metrics",
-          "id": 1
+          "type": "text"
         }
       ],
-      "notice": false
+      "title": "Actor Metrics Label"
     },
     {
-      "title": "Intro and Processed Count",
-      "height": "350px",
-      "editable": true,
-      "collapse": false,
       "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "350px",
+      "notice": false,
       "panels": [
         {
-          "error": false,
-          "span": 3,
+          "content": "This dashboard gives a simple overview metrics collected by Kamon from your application. By default the pattern in which metrics \nare reported contains the application name (see the application key in kamon-statsd's reference.conf file) and the host name from \nwhich the metrics are being collected. The filters on the upper left side let you select between these two path keys. \n\nFeel free to play with this dashboard, see how the panels are constructed and create your own dashboard according to your needs!",
           "editable": true,
-          "type": "text",
+          "error": false,
+          "id": 2,
           "loadingEditor": false,
           "mode": "markdown",
-          "content": "This dashboard gives a simple overview metrics collected by Kamon from your application. By default the pattern in which metrics \nare reported contains the application name (see the application key in kamon-statsd's reference.conf file) and the host name from \nwhich the metrics are being collected. The filters on the upper left side let you select between these two path keys. \n\nFeel free to play with this dashboard, see how the panels are constructed and create your own dashboard according to your needs!",
+          "span": 3,
           "style": {},
           "title": "Welcome to the Kamon Example Dashboard!",
-          "id": 2
+          "type": "text"
         },
         {
-          "span": 9,
-          "editable": true,
-          "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "ns",
-            "µs"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false,
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
+          "aliasColors": {},
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": true,
-            "max": true,
-            "current": false,
-            "total": false,
-            "avg": false
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
           },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "null as zero",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true,
-            "shared": false
-          },
-          "targets": [
-            {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.processing-time.upper_99, 5)",
-              "hide": false
-            }
-          ],
-          "aliasColors": {},
-          "title": "# of Processed Messages per Actor",
-          "leftYAxisLabel": "Message Count",
-          "rightYAxisLabel": "Processing Time",
           "id": 3,
+          "leftYAxisLabel": "Message Count",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "rightYAxisLabel": "Processing Time",
+          "scale": 1,
           "seriesOverrides": [
             {
               "alias": "user-simple-service-actor processing time",
               "yaxis": 2
             }
-          ]
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "Other Stuff",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "span": 6,
-          "editable": true,
+          ],
+          "span": 9,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "hide": false,
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.processing-time.count,5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "# of Processed Messages per Actor",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
           "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
           "x-axis": true,
           "y-axis": true,
-          "scale": 1,
           "y_formats": [
             "short",
             "µs"
           ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
+          "zerofill": true
+        }
+      ],
+      "title": "Intro and Processed Count"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
-            "current": false,
-            "total": false,
-            "avg": false
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "connected",
-          "steppedLine": true,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true,
-            "shared": false
-          },
-          "targets": [
-            {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.mailbox-size.mean, 5)"
-            }
-          ],
-          "aliasColors": {},
-          "title": "Mailbox Size per Actor",
           "id": 4,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
           "seriesOverrides": [
             {
               "alias": "OK-Future",
               "yaxis": 2
             }
-          ]
-        },
-        {
+          ],
           "span": 6,
-          "editable": true,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.mailbox-size.mean,5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Mailbox Size per Actor",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
           "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
           "x-axis": true,
           "y-axis": true,
-          "scale": 1,
           "y_formats": [
-            "ns",
+            "short",
+            "µs"
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "OK-Future",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.time-in-mailbox.mean,0.001),5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Time in Mailbox per Actor",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "µs",
             "none"
           ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
-            "current": false,
-            "total": false,
-            "avg": false
-          },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "null as zero",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true,
-            "shared": false
-          },
-          "targets": [
-            {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.time-in-mailbox.upper_99, 5)"
-            }
-          ],
-          "aliasColors": {},
-          "title": "Time in Mailbox per Actor",
-          "id": 5,
-          "seriesOverrides": [
-            {
-              "alias": "OK-Future",
-              "yaxis": 2
-            }
-          ]
+          "zerofill": true
         }
       ],
-      "notice": false
+      "title": "Other Stuff"
     },
     {
-      "title": "Actor Processing Time",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
       "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
       "panels": [
         {
-          "span": 12,
-          "editable": true,
-          "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "ns",
-            "µs"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false,
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
+          "aliasColors": {},
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": true,
-            "max": true,
-            "current": false,
-            "total": false,
-            "avg": false
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
           },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "null as zero",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true,
-            "shared": false
-          },
-          "targets": [
-            {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].akka-actor.*.processing-time.upper_98, 5)",
-              "hide": false
-            }
-          ],
-          "aliasColors": {},
-          "title": "Processing Time per Actor",
-          "leftYAxisLabel": "Message Count",
-          "rightYAxisLabel": "Processing Time",
           "id": 6,
+          "leftYAxisLabel": "Message Count",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "rightYAxisLabel": "Processing Time",
+          "scale": 1,
           "seriesOverrides": [
             {
               "alias": "user-simple-service-actor processing time",
               "yaxis": 2
             }
-          ]
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "Trace Metrics Label",
-      "height": "80px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "error": false,
+          ],
           "span": 12,
-          "editable": true,
-          "type": "text",
-          "loadingEditor": false,
-          "mode": "markdown",
-          "content": "## Trace Metrics ##",
-          "style": {},
-          "title": "Trace Metrics",
-          "id": 7
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "Trace Metrics and Intro",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "span": 8,
-          "editable": true,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "hide": false,
+              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.processing-time.mean,0.001),5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Processing Time per Actor",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
           "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
           "x-axis": true,
           "y-axis": true,
-          "scale": 1,
           "y_formats": [
-            "short",
-            "short"
+            "µs",
+            "µs"
           ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
+          "zerofill": true
+        }
+      ],
+      "title": "Actor Processing Time"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "80px",
+      "notice": false,
+      "panels": [
+        {
+          "content": "## Trace Metrics ##",
+          "editable": true,
+          "error": false,
+          "id": 7,
+          "loadingEditor": false,
+          "mode": "markdown",
+          "span": 12,
+          "style": {},
+          "title": "Trace Metrics",
+          "type": "text"
+        }
+      ],
+      "title": "Trace Metrics Label"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 8,
           "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
+            "avg": false,
             "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 8,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true,
-            "shared": false
-          },
           "targets": [
             {
               "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.count,5)"
             }
           ],
-          "aliasColors": {},
+          "timeFrom": null,
+          "timeShift": null,
           "title": "# of Processed Traces",
-          "id": 8,
-          "seriesOverrides": []
-        },
-        {
-          "error": false,
-          "span": 4,
-          "editable": true,
-          "type": "text",
-          "loadingEditor": false,
-          "mode": "markdown",
-          "content": "Whether your are manually starting/finishing TraceContexts or letting Kamon do it for you in Spray and Play! applications\nthis section contains metrics about those traces!",
-          "style": {},
-          "title": "Trace Metrics",
-          "id": 9
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "Latency and Relative Time per Trace",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "span": 6,
-          "editable": true,
-          "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "ns",
-            "short"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
-            "current": false,
-            "total": false,
-            "avg": false
-          },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "null as zero",
-          "steppedLine": false,
           "tooltip": {
-            "value_type": "individual",
             "query_as_alias": true,
-            "shared": false
+            "shared": true,
+            "value_type": "cumulative"
           },
-          "targets": [
-            {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.upper_98, 5)"
-            }
-          ],
-          "aliasColors": {},
-          "title": "Trace Processing Time",
-          "id": 10,
-          "seriesOverrides": []
-        },
-        {
-          "span": 6,
-          "editable": true,
           "type": "graph",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
           "x-axis": true,
           "y-axis": true,
-          "scale": 1,
           "y_formats": [
             "short",
             "short"
           ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "leftMax": null,
-            "rightMax": null,
-            "leftMin": null,
-            "rightMin": null
-          },
+          "zerofill": true
+        },
+        {
+          "content": "Whether your are manually starting/finishing TraceContexts or letting Kamon do it for you in Spray and Play! applications\nthis section contains metrics about those traces!",
+          "editable": true,
+          "error": false,
+          "id": 9,
+          "loadingEditor": false,
+          "mode": "markdown",
+          "span": 4,
+          "style": {},
+          "title": "Trace Metrics",
+          "type": "text"
+        }
+      ],
+      "title": "Trace Metrics and Intro"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": false,
+          "bars": false,
+          "datasource": null,
+          "editable": true,
           "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": true,
-          "stack": true,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 10,
           "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
+            "avg": false,
             "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": true,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
           "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
+          "targets": [
+            {
+              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,0.001),5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Trace Processing Time",
           "tooltip": {
-            "value_type": "individual",
             "query_as_alias": true,
-            "shared": false
+            "shared": true,
+            "value_type": "individual"
           },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "µs",
+            "short"
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": true,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 11,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": true,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
           "targets": [
             {
               "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,5)"
             }
           ],
-          "aliasColors": {},
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Relative time per Trace",
-          "id": 11,
-          "seriesOverrides": []
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "zerofill": true
         }
       ],
-      "notice": false
+      "title": "Latency and Relative Time per Trace"
     }
   ],
   "nav": [
     {
-      "type": "timepicker",
       "collapse": false,
-      "notice": false,
       "enable": true,
-      "status": "Stable",
-      "time_options": [
-        "5m",
-        "15m",
-        "1h",
-        "6h",
-        "12h",
-        "24h",
-        "2d",
-        "7d",
-        "30d"
-      ],
+      "notice": false,
+      "now": true,
       "refresh_intervals": [
         "5s",
         "10s",
@@ -645,7 +660,19 @@
         "2h",
         "1d"
       ],
-      "now": true
+      "status": "Stable",
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ],
+      "type": "timepicker"
     }
   ],
   "time": {
@@ -655,50 +682,47 @@
   "templating": {
     "list": [
       {
-        "type": "query",
-        "name": "Application",
-        "query": "stats.timers.*",
+        "allFormat": "glob",
+        "current": {
+          "text": "kamon",
+          "value": "kamon"
+        },
+        "datasource": null,
         "includeAll": false,
+        "name": "Application",
         "options": [
           {
             "text": "kamon",
             "value": "kamon"
           }
         ],
-        "datasource": null,
-        "allFormat": "glob",
-        "refresh": true,
-        "current": {
-          "text": "kamon",
-          "value": "kamon"
-        }
+        "query": "stats.timers.*",
+        "type": "query"
       },
       {
-        "type": "query",
+        "allFormat": "glob",
+        "current": {
+          "text": "localhost",
+          "value": "localhost"
+        },
+        "datasource": null,
         "name": "Host",
-        "query": "stats.timers.*.*",
         "options": [
           {
-            "text": "ivantopo-desktop",
-            "value": "ivantopo-desktop"
+            "text": "localhost",
+            "value": "localhost"
           }
         ],
-        "datasource": null,
-        "allFormat": "glob",
-        "refresh": true,
-        "current": {
-          "text": "ivantopo-desktop",
-          "value": "ivantopo-desktop"
-        }
+        "query": "stats.timers.*.*",
+        "type": "query"
       }
-    ],
-    "enable": true
+    ]
   },
   "annotations": {
-    "enable": false,
     "list": []
   },
   "refresh": "5s",
-  "version": 6,
-  "hideAllLegends": false
+  "schemaVersion": 6,
+  "version": 1,
+  "links": []
 }
