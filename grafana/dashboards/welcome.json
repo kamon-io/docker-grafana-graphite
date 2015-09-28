@@ -111,7 +111,7 @@
           "targets": [
             {
               "hide": false,
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.processing-time.count,5)"
+              "target": "aliasByNode(stats.timers.$Application.$Host.akka-actor.*.processing-time.count,5)"
             }
           ],
           "timeFrom": null,
@@ -195,7 +195,7 @@
           "steppedLine": true,
           "targets": [
             {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].actor.*.mailbox-size.mean,5)"
+              "target": "aliasByNode(stats.timers.$Application.$Host.akka-actor.*.mailbox-size.mean,5)"
             }
           ],
           "timeFrom": null,
@@ -269,7 +269,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.time-in-mailbox.mean,0.001),5)"
+              "target": "aliasByNode(scale(stats.timers.$Application.$Host.akka-actor.*.time-in-mailbox.mean,0.001),5)"
             }
           ],
           "timeFrom": null,
@@ -357,7 +357,7 @@
           "targets": [
             {
               "hide": false,
-              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].actor.*.processing-time.mean,0.001),5)"
+              "target": "aliasByNode(scale(stats.timers.$Application.$Host.akka-actor.*.processing-time.mean,0.001),5)"
             }
           ],
           "timeFrom": null,
@@ -458,7 +458,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.count,5)"
+              "target": "aliasByNode(stats.timers.$Application.$Host.trace.*.elapsed-time.count,5)"
             }
           ],
           "timeFrom": null,
@@ -549,7 +549,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "target": "aliasByNode(scale(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,0.001),5)"
+              "target": "aliasByNode(scale(stats.timers.$Application.$Host.trace.*.elapsed-time.mean,0.001),5)"
             }
           ],
           "timeFrom": null,
@@ -618,7 +618,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "target": "aliasByNode(stats.timers.[[Application]].[[Host]].trace.*.elapsed-time.mean,5)"
+              "target": "aliasByNode(stats.timers.$Application.$Host.trace.*.elapsed-time.mean,5)"
             }
           ],
           "timeFrom": null,
@@ -697,7 +697,8 @@
           }
         ],
         "query": "stats.timers.*",
-        "type": "query"
+        "refresh": true,
+	"type": "query"
       },
       {
         "allFormat": "glob",
@@ -714,7 +715,8 @@
           }
         ],
         "query": "stats.timers.*.*",
-        "type": "query"
+        "refresh": true,
+	"type": "query"
       }
     ]
   },
