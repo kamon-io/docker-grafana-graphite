@@ -25,14 +25,21 @@ If you already have services running on your host that are using any of these po
 ports to whatever you want by changing left side number in the `-p` parameters. Find more details about mapping ports
 in the [Docker documentation](http://docs.docker.io/use/port_redirection/#port-redirection).
 
-### To keep dashboard configuration permanent
+### To keep data and dashboard configuration permanent
 
-Create an empty db file and attach it to the container as volume:
+Create an empty db file and a directory in the Docker host
 
 ```
 sudo touch /opt/grafana.db
+sudo mkdir /opt/graphite/storage/whisper
+```
+
+Attach file and directory as volume
+
+```
 docker run -d \
 -v /opt/grafana.db:/opt/grafana/data/grafana.db \
+-v /opt/graphite/storage/whisper:/opt/graphite/storage/whisper \
 -p 80:80 \
 -p 8125:8125/udp \
 -p 8126:8126 \
