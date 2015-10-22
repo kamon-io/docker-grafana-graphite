@@ -13,7 +13,7 @@ RUN     apt-get -y update
 RUN     apt-get -y install python-django-tagging python-simplejson python-memcache python-ldap python-cairo python-pysqlite2 python-support \
                            python-pip gunicorn supervisor nginx-light nodejs git wget curl openjdk-7-jre build-essential python-dev
 
-RUN     pip install Twisted==11.1.0
+RUN     pip install Twisted==13.2.0
 RUN     pip install Django==1.5
 RUN     pip install pytz
 RUN     npm install ini chokidar
