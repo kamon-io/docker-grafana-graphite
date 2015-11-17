@@ -9,4 +9,4 @@ if [ -d "./logs" ];then
 	rm -fr ./logs/*
 fi
 
-docker run -d -v $(pwd)/logs:/var/log/supervisor -p 80:80 -p 8125:8125/udp -p 8126:8126 --name $CONTAINER_NAME kamon/grafana_graphite
+docker run -d -v $(pwd)/logs:/var/log/supervisor -p 80:80 -p 8125:8125/udp -p 8126:8126 -p 2004:2004 --name $CONTAINER_NAME kamon/grafana_graphite

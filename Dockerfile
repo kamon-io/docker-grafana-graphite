@@ -97,6 +97,8 @@ EXPOSE  8125/udp
 # StatsD Management port
 EXPOSE  8126
 
+# Graphite Pickled Port
+EXPOSE  2004
 
 
 # -------- #
