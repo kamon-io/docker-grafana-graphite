@@ -12,18 +12,18 @@ This image is published under [Kamon's repository on the Docker Index](https://i
 need as a prerequisite is having Docker installed on your machine. The container exposes the following ports:
 
 - `80`: the Grafana web interface.
+- `8000`: the Graphite web port
 - `8125`: the StatsD port.
 - `8126`: the StatsD administrative port.
 
 To start a container with this image you just need to run the following command:
 
 ```bash
-docker run -d -p 80:80 -p 8125:8125/udp -p 8126:8126 --name kamon-grafana-dashboard kamon/grafana_graphite
+docker run -d -p 80:80 -p 8000:8000 -p 8125:8125/udp -p 8126:8126 --name kamon-grafana-dashboard kamon/grafana_graphite
 ```
 
 If you already have services running on your host that are using any of these ports, you may wish to map the container
-ports to whatever you want by changing left side number in the `-p` parameters. Find more details about mapping ports
-in the [Docker documentation](http://docs.docker.io/use/port_redirection/#port-redirection).
+ports to whatever you want by changing left side number in the `-p` parameters. You can omit ports you do not plan to use. Find more details about mapping ports in the [Docker documentation](http://docs.docker.io/use/port_redirection/#port-redirection).
 
 
 ### Building the image yourself ###
