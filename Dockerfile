@@ -98,7 +98,7 @@ EXPOSE  8125/udp
 EXPOSE  8126
 
 # Graphite web port
-EXPOSE 8000
+EXPOSE 81
 
 
 
