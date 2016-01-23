@@ -69,11 +69,11 @@ docker run \
    --publish=8125:8125/udp \
    --publish=8126:8126 \
    --name kamon-grafana-dashboard \
-   --volume=$(pwd)\data\whisper:/opt/graphite/storage/whisper \
-   --volume=$(pwd)\data\elasticsearch:/var/lib/elasticsearch \
-   --volume=$(pwd)\data\grafana:/opt/grafana/data \
-   --volume=$(pwd)\log\graphite:/opt/graphite/storage/log \
-   --volume=$(pwd)\log\elasticsearch:/var/log/elasticsearch \
+   --volume=$(pwd)/data/whisper:/opt/graphite/storage/whisper \
+   --volume=$(pwd)/data/elasticsearch:/var/lib/elasticsearch \
+   --volume=$(pwd)/data/grafana:/opt/grafana/data \
+   --volume=$(pwd)/log/graphite:/opt/graphite/storage/log \
+   --volume=$(pwd)/log/elasticsearch:/var/log/elasticsearch \
    kamon/grafana_graphite
 ```
 
