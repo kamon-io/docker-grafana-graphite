@@ -388,10 +388,366 @@
       "notice": false,
       "panels": [
         {
-          "content": "## Trace Metrics ##",
+          "content": "## Router Metrics ##",
           "editable": true,
           "error": false,
           "id": 7,
+          "loadingEditor": false,
+          "mode": "markdown",
+          "span": 12,
+          "style": {},
+          "title": "Router Metrics",
+          "type": "text"
+        }
+      ],
+      "title": "Router Metrics label"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "350px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "id": 8,
+          "leftYAxisLabel": "Message Count",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "rightYAxisLabel": "Processing Time",
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "user-simple-service-actor processing time",
+              "yaxis": 2
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "hide": false,
+              "target": "aliasByNode(stats.timers.$Application.$Host.akka-router.*.processing-time.count,5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "# of Processed Messages per Router",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "µs"
+          ],
+          "zerofill": true
+        }
+      ],
+      "title": "Processed Count"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 9,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "OK-Future",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "target": "aliasByNode(scale(stats.timers.$Application.$Host.akka-router.*.routing-time.mean,0.001),5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Routing Time per Router",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "µs"
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 10,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "OK-Future",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "target": "aliasByNode(scale(stats.timers.$Application.$Host.akka-router.*.time-in-mailbox.mean,0.001),5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Time in Mailbox per Router",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "µs",
+            "none"
+          ],
+          "zerofill": true
+        }
+      ],
+      "title": "Other Stuff"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "max": null,
+            "min": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "id": 11,
+          "leftYAxisLabel": "Message Count",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "rightYAxisLabel": "Processing Time",
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "user-simple-service-actor processing time",
+              "yaxis": 2
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "hide": false,
+              "target": "aliasByNode(scale(stats.timers.$Application.$Host.akka-router.*.processing-time.mean,0.001),5)"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Processing Time per Router",
+          "tooltip": {
+            "query_as_alias": true,
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "µs",
+            "µs"
+          ],
+          "zerofill": true
+        }
+      ],
+      "title": "Router Processing Time"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "80px",
+      "notice": false,
+      "panels": [
+        {
+          "content": "## Trace Metrics ##",
+          "editable": true,
+          "error": false,
+          "id": 12,
           "loadingEditor": false,
           "mode": "markdown",
           "span": 12,
@@ -432,7 +788,7 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 8,
+          "id": 13,
           "legend": {
             "avg": false,
             "current": false,
@@ -482,7 +838,7 @@
           "content": "Whether your are manually starting/finishing TraceContexts or letting Kamon do it for you in Spray and Play! applications\nthis section contains metrics about those traces!",
           "editable": true,
           "error": false,
-          "id": 9,
+          "id": 14,
           "loadingEditor": false,
           "mode": "markdown",
           "span": 4,
@@ -523,7 +879,7 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 10,
+          "id": 15,
           "legend": {
             "avg": false,
             "current": false,
@@ -592,7 +948,7 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 11,
+          "id": 16,
           "legend": {
             "avg": false,
             "current": false,
@@ -698,7 +1054,7 @@
         ],
         "query": "stats.timers.*",
         "refresh": true,
-	"type": "query"
+        "type": "query"
       },
       {
         "allFormat": "glob",
@@ -716,7 +1072,7 @@
         ],
         "query": "stats.timers.*.*",
         "refresh": true,
-	"type": "query"
+        "type": "query"
       }
     ]
   },
