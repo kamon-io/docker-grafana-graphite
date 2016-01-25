@@ -1,3 +1,6 @@
 #! /bin/bash
 
-docker build -t kamon/grafana_graphite .
+docker build -t vsm/grafana_graphite .
+# if you want to take this & make it live
+# ID_PRODUCED is output in text from the build above
+# docker tag -f $ID_PRODUCED vsm/graphite_grafana:latest
