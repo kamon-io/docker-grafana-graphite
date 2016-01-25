@@ -1,12 +1,23 @@
 #! /bin/bash
 
-CONTAINER_NAME="kamon-grafana-dashboard"
+CONTAINER_NAME=${CONTAINER_NAME:-"vsm-grafana"}
 if [ $(docker ps -a | grep $CONTAINER_NAME | awk '{print $NF}' | wc -l) -gt 0 ];then
 	docker kill $CONTAINER_NAME
 	docker rm $CONTAINER_NAME
 fi
 if [ -d "./logs" ];then
-	rm -fr ./logs/*
+	sudo rm -fr ./logs/*
 fi
 
-docker run -d -v $(pwd)/logs:/var/log/supervisor -p 80:80 -p 8125:8125/udp -p 8126:8126 --name $CONTAINER_NAME kamon/grafana_graphite
+PORT_START=${PORT_START:-8900}
+
+# starts at 8900, 8901
+GR_WEB=$PORT_START
+GR_ADMIN=$((GR_WEB + 1))
+
+# starts at 8925, 8926
+STATD=$((PORT_START + 25))
+STATD_ADMIN=$((STATD + 1))
+
+# local dir for logs, so nice!
+docker run -d -v $(pwd)/logs:/var/log/supervisor -p $GR_WEB:80 -p $GR_ADMIN:81 -p $STATD:8125/udp -p $STATD_ADMIN:8126 --name $CONTAINER_NAME vsm/graphite_grafana:latest
