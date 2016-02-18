@@ -59,6 +59,7 @@ mkdir -p data/whisper
 mkdir -p data/elasticsearch
 mkdir -p data/grafana
 mkdir -p log/graphite
+mkdir -p log/graphite/webapp
 mkdir -p log/elasticsearch
 chmod -R 777 *
 
