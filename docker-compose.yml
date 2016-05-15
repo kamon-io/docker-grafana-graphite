@@ -11,7 +11,5 @@ services:
       - '8126:8126'
     volumes:
       - ./data/whisper:/opt/graphite/storage/whisper
-      - ./data/elasticsearch:/var/lib/elasticsearch
       - ./data/grafana:/opt/grafana/data
       - ./log/graphite:/opt/graphite/storage/log
-      - ./log/elasticsearch:/var/log/elasticsearch
