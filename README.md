@@ -9,7 +9,7 @@ for using this image:
 ### Using the Docker Index ###
 
 This image is published under [Kamon's repository on the Docker Hub](https://hub.docker.com/u/kamon/) and all you
-need as a prerequisite is having Docker installed on your machine. The container exposes the following ports:
+need as a prerequisite is having `docker`, `docker-compose`, and `make` installed on your machine. The container exposes the following ports:
 
 - `80`: the Grafana web interface.
 - `81`: the Graphite web port
@@ -19,14 +19,22 @@ need as a prerequisite is having Docker installed on your machine. The container
 To start a container with this image you just need to run the following command:
 
 ```bash
-docker run \
-  --detach \
-   --publish=80:80 \
-   --publish=81:81 \
-   --publish=8125:8125/udp \
-   --publish=8126:8126 \
-   --name kamon-grafana-dashboard \
-   kamon/grafana_graphite
+$ make up
+```
+
+To stop the container
+```bash
+$ make down
+```
+
+To run container's shell
+```bash
+$ make shell
+```
+
+To view the container log
+```bash
+$ make tail
 ```
 
 If you already have services running on your host that are using any of these ports, you may wish to map the container
@@ -48,35 +56,11 @@ Once your container is running all you need to do is:
 - configure a new datasource to point at the Graphite metric data (URL - http://localhost:8000) and replace the default Grafana test datasource for your graphs
 - then play with the dashboard at your wish...
 
-### Making your data last ###
 
-There are several ways of using Docker volumes to persist the settings and databases of the docker-grafana-graphite container. Here is an example script that will create directories on your host and mount them into the Docker container, allowing graphite and grafana to persist data and settings between runs of the container.
+### Persisted Data ###
 
-```bash
-mkdir kamon-grafana-service
-cd kamon-grafana-service
-mkdir -p data/whisper
-mkdir -p data/elasticsearch
-mkdir -p data/grafana
-mkdir -p log/graphite
-mkdir -p log/graphite/webapp
-mkdir -p log/elasticsearch
-chmod -R 777 *
+When running `make up`, directories are created on your host and mounted into the Docker container, allowing graphite and grafana to persist data and settings between runs of the container.
 
-docker run \
-  --detach \
-   --publish=80:80 \
-   --publish=81:81 \
-   --publish=8125:8125/udp \
-   --publish=8126:8126 \
-   --name kamon-grafana-dashboard \
-   --volume=$(pwd)/data/whisper:/opt/graphite/storage/whisper \
-   --volume=$(pwd)/data/elasticsearch:/var/lib/elasticsearch \
-   --volume=$(pwd)/data/grafana:/opt/grafana/data \
-   --volume=$(pwd)/log/graphite:/opt/graphite/storage/log \
-   --volume=$(pwd)/log/elasticsearch:/var/log/elasticsearch \
-   kamon/grafana_graphite
-```
 
 ### Now go explore! ###
 
