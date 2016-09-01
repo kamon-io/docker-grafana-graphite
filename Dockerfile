@@ -12,10 +12,9 @@ RUN     apt-get -y install software-properties-common
 RUN     add-apt-repository -y ppa:chris-lea/node.js
 RUN     apt-get -y update
 RUN     apt-get -y install python-django-tagging python-simplejson python-memcache python-ldap python-cairo python-pysqlite2 python-support \
-                           python-pip gunicorn supervisor nginx-light nodejs git wget curl openjdk-7-jre build-essential python-dev
+                           python-pip gunicorn supervisor nginx-light nodejs git wget curl openjdk-7-jre build-essential python-dev libffi-dev
 
 RUN     pip install Twisted==11.1.0
-RUN     pip install Django==1.5
 RUN     pip install pytz
 RUN     npm install ini chokidar
 
@@ -34,8 +33,9 @@ RUN     git clone https://github.com/graphite-project/carbon.git /src/carbon    
 
 RUN     git clone https://github.com/graphite-project/graphite-web.git /src/graphite-web  &&\
         cd /src/graphite-web                                                              &&\
-        git checkout 0.9.x                                                                &&\
-        python setup.py install
+        python setup.py install                                                           &&\
+        pip install -r requirements.txt                                                   &&\
+        python check-dependencies.py
 
 # Install StatsD
 RUN     git clone https://github.com/etsy/statsd.git /src/statsd                                                                        &&\
@@ -69,7 +69,8 @@ RUN     touch /opt/graphite/storage/graphite.db /opt/graphite/storage/index
 RUN     chown -R www-data /opt/graphite/storage
 RUN     chmod 0775 /opt/graphite/storage /opt/graphite/storage/whisper
 RUN     chmod 0664 /opt/graphite/storage/graphite.db
-RUN     cd /opt/graphite/webapp/graphite && python manage.py syncdb --noinput
+RUN     cp /src/graphite-web/webapp/manage.py /opt/graphite/webapp
+RUN     cd /opt/graphite/webapp/ && python manage.py migrate --run-syncdb --noinput
 
 # Configure Grafana
 ADD     ./grafana/custom.ini /opt/grafana/conf/custom.ini
