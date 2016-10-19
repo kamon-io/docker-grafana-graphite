@@ -77,6 +77,7 @@ ADD     ./grafana/custom.ini /opt/grafana/conf/custom.ini
 # Add the default dashboards
 RUN     mkdir /src/dashboards
 ADD     ./grafana/dashboards/* /src/dashboards/
+ADD     ./grafana/set-local-graphite-source.sh /src/
 RUN     mkdir /src/dashboard-loader
 ADD     ./grafana/dashboard-loader/dashboard-loader.js /src/dashboard-loader/
 
@@ -108,3 +109,4 @@ EXPOSE 81
 # -------- #
 
 CMD     ["/usr/bin/supervisord"]
+
