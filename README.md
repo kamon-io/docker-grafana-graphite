@@ -1,4 +1,4 @@
-StatsD + Graphite + Grafana 2 + Kamon Dashboards
+StatsD + Graphite + Grafana 3 + Kamon Dashboards
 ---------------------------------------------
 
 This image contains a sensible default configuration of StatsD, Graphite and Grafana, and comes bundled with a example
@@ -51,10 +51,10 @@ to know how tha image was built. The repo also has `build` and `start` scripts t
 ### Using the Dashboards ###
 
 Once your container is running all you need to do is:
-- open your browser pointing to the host/port you just published
+- open your browser pointing to http://localhost:80 (or another port if you changed it)
 - login with the default username (admin) and password (admin)
-- configure a new datasource to point at the Graphite metric data (URL - http://localhost:8000) and replace the default Grafana test datasource for your graphs
-- then play with the dashboard at your wish...
+- open existing dashboard (or create a new one) and select 'Local Graphite' datasource
+- play with the dashboard at your wish...
 
 
 ### Persisted Data ###
