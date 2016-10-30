@@ -51,7 +51,9 @@ to know how tha image was built. The repo also has `build` and `start` scripts t
 ### Using the Dashboards ###
 
 Once your container is running all you need to do is:
+
 - open your browser pointing to http://localhost:80 (or another port if you changed it)
+  - Docker with VirtualBox on macOS: use `docker-machine ip` instead of `localhost`
 - login with the default username (admin) and password (admin)
 - open existing dashboard (or create a new one) and select 'Local Graphite' datasource
 - play with the dashboard at your wish...
