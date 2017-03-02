@@ -1,4 +1,4 @@
-StatsD + Graphite + Grafana 3 + Kamon Dashboards
+StatsD + Graphite + Grafana 4 + Kamon Dashboards
 ---------------------------------------------
 
 This image contains a sensible default configuration of StatsD, Graphite and Grafana, and comes bundled with a example
