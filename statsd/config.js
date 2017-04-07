@@ -8,7 +8,7 @@
   graphiteHost: "127.0.0.1",
   flushInterval: 10000,
 
-  backends: ['./backends/graphite'],
+  backends: ['./backends/graphite', './backends/console'],
   graphite: {
     legacyNamespace: false
   }
