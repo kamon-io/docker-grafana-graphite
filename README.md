@@ -41,6 +41,117 @@ $ make tail
 If you already have services running on your host that are using any of these ports, you may wish to map the container
 ports to whatever you want by changing left side number in the `--publish` parameters. You can omit ports you do not plan to use. Find more details about mapping ports in the Docker documentation on [Binding container ports to the host](https://docs.docker.com/engine/userguide/networking/default_network/binding/) and [Legacy container links](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/).
 
+### To keep data and dashboard configuration permanent
+
+Create an empty db file and a directory in the Docker host
+
+```
+sudo touch /opt/grafana.db
+sudo mkdir /opt/graphite/storage/whisper
+```
+
+Attach file and directory as volume
+
+```
+docker run -d \
+-v /opt/grafana.db:/opt/grafana/data/grafana.db \
+-v /opt/graphite/storage/whisper:/opt/graphite/storage/whisper \
+-p 80:80 \
+-p 8125:8125/udp \
+-p 8126:8126 \
+--name kamon-grafana-dashboard \
+kamon/grafana_graphite
+```
+
+### How to run Database and WebApp on different container
+
+Create 2 supervisord configuration file for frontend services (nginx, grafana-webapp, graphite-webapp, dashboard-loader, statsd) and backend service (carbon-cache).
+
+**frontend.conf**
+```
+[supervisord]
+nodaemon = true
+environment = GRAPHITE_STORAGE_DIR='/opt/graphite/storage',GRAPHITE_CONF_DIR='/opt/graphite/conf'
+
+[program:nginx]
+command = /usr/sbin/nginx
+stdout_logfile = /var/log/supervisor/%(program_name)s.log
+stderr_logfile = /var/log/supervisor/%(program_name)s.log
+autorestart = true
+
+[program:grafana-webapp]
+;user = www-data
+directory = /opt/grafana/
+command = /opt/grafana/bin/grafana-server
+stdout_logfile = /var/log/supervisor/%(program_name)s.log
+stderr_logfile = /var/log/supervisor/%(program_name)s.log
+autorestart = true
+
+[program:graphite-webapp]
+;user = www-data
+directory = /opt/graphite/webapp
+environment = PYTHONPATH='/opt/graphite/webapp'
+command = /usr/bin/gunicorn_django -b127.0.0.1:8000 -w2 graphite/settings.py
+stdout_logfile = /var/log/supervisor/%(program_name)s.log
+stderr_logfile = /var/log/supervisor/%(program_name)s.log
+autorestart = true
+
+[program:statsd]
+;user = www-data
+command = /usr/bin/node /src/statsd/stats.js /src/statsd/config.js
+stdout_logfile = /var/log/supervisor/%(program_name)s.log
+stderr_logfile = /var/log/supervisor/%(program_name)s.log
+autorestart = true
+
+[program:dashboard-loader]
+;user = www-data
+directory = /src/dashboards
+command = /usr/bin/node /src/dashboard-loader/dashboard-loader.js -w .
+stdout_logfile = /var/log/supervisor/%(program_name)s.log
+stderr_logfile = /var/log/supervisor/%(program_name)s.log
+exitcodes = 0
+autorestart = unexpected
+startretries = 3
+```
+
+**backend.conf**
+```
+[supervisord]
+nodaemon = true
+environment = GRAPHITE_STORAGE_DIR='/opt/graphite/storage',GRAPHITE_CONF_DIR='/opt/graphite/conf'
+
+[program:carbon-cache]
+;user = www-data
+command = /opt/graphite/bin/carbon-cache.py --debug start
+stdout_logfile = /var/log/supervisor/%(program_name)s.log
+stderr_logfile = /var/log/supervisor/%(program_name)s.log
+autorestart = true
+```
+
+Attach each config file into its respective container
+
+**FRONTEND**
+```
+docker run -d \
+-v /opt/graphite/grafana.db:/opt/grafana/data/grafana.db \
+-v /opt/graphite/storage/whisper:/opt/graphite/storage/whisper \
+-v /opt/graphite/frontend.conf:/etc/supervisor/conf.d/supervisord.conf \
+-p 80:80 \
+-p 8125:8125/udp \
+-p 8126:8126 \
+--name grafana-frontend \
+kamon/grafana_graphite
+```
+**BACKEND**
+```
+docker run -d \
+-v /opt/graphite/grafana.db:/opt/grafana/data/grafana.db \
+-v /opt/graphite/storage/whisper:/opt/graphite/storage/whisper \
+-v /opt/graphite/backend.conf:/etc/supervisor/conf.d/supervisord.conf \
+-p 2003:2003 \
+--name grafana-backend \
+kamon/grafana_graphite
+```
 
 ### Building the image yourself ###
 
