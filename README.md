@@ -38,8 +38,15 @@ To view the container log
 $ make tail
 ```
 
-If you already have services running on your host that are using any of these ports, you may wish to map the container
-ports to whatever you want by changing left side number in the `--publish` parameters. You can omit ports you do not plan to use. Find more details about mapping ports in the Docker documentation on [Binding container ports to the host](https://docs.docker.com/engine/userguide/networking/default_network/binding/) and [Legacy container links](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/).
+If you already have services running on your host that are using any
+of these ports, you may wish to map the container ports to whatever
+you want by changing left side number in the `--publish` parameters,
+or the 'ports' parameters in 'docker-compose.yml'. You can omit ports
+you do not plan to use. Find more details about mapping ports in the
+Docker documentation on [Binding container ports to the
+host](https://docs.docker.com/engine/userguide/networking/default_network/binding/)
+and [Legacy container
+links](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/).
 
 
 ### Building the image yourself ###
