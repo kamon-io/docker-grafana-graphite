@@ -1,0 +1,1 @@
+{"name":"Local Graphite","type":"graphite","url":"http://localhost:8000","access":"proxy","isDefault":true}

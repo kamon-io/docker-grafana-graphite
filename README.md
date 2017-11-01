@@ -13,6 +13,7 @@ need as a prerequisite is having `docker`, `docker-compose`, and `make` installe
 
 - `80`: the Grafana web interface.
 - `81`: the Graphite web port
+- `2003`: the Graphite data port
 - `8125`: the StatsD port.
 - `8126`: the StatsD administrative port.
 
@@ -45,7 +46,7 @@ ports to whatever you want by changing left side number in the `--publish` param
 
 The Dockerfile and supporting configuration files are available in our [Github repository](https://github.com/kamon-io/docker-grafana-graphite).
 This comes specially handy if you want to change any of the StatsD, Graphite or Grafana settings, or simply if you want
-to know how tha image was built. The repo also has `build` and `start` scripts to make your workflow more pleasant.
+to know how the image was built.
 
 
 ### Using the Dashboards ###
