@@ -14,3 +14,4 @@ services:
       - ./data/whisper:/opt/graphite/storage/whisper
       - ./data/grafana:/opt/grafana/data
       - ./log/graphite:/opt/graphite/storage/log
+      - ./log/supervisor:/var/log/supervisor
