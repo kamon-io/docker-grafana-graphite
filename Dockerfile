@@ -67,6 +67,7 @@ ADD     ./graphite/carbon.conf /opt/graphite/conf/carbon.conf
 ADD     ./graphite/storage-schemas.conf /opt/graphite/conf/storage-schemas.conf
 ADD     ./graphite/storage-aggregation.conf /opt/graphite/conf/storage-aggregation.conf
 RUN     mkdir -p /opt/graphite/storage/whisper                                                                       &&\
+        mkdir -p /opt/graphite/storage/log/webapp                                                                    &&\
         touch /opt/graphite/storage/graphite.db /opt/graphite/storage/index                                          &&\
         chown -R www /opt/graphite/storage                                                                           &&\
         chmod 0775 /opt/graphite/storage /opt/graphite/storage/whisper                                               &&\
