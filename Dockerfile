@@ -46,7 +46,6 @@ RUN     mkdir /src/grafana                                                      
         curl https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.6.3.linux-x64.tar.gz \
              -o /src/grafana.tar.gz                                                                                  &&\
         tar -xzf /src/grafana.tar.gz -C /opt/grafana --strip-components=1                                            &&\
-        ./opt/grafana/bin/grafana-cli plugins install alexanderzobnin-zabbix-app                                     &&\
         rm /src/grafana.tar.gz
 
 
@@ -90,6 +89,7 @@ RUN 	mkdir /src/datasources                                                     
 ADD     ./grafana/datasources/* /src/datasources
 ADD     ./grafana/dashboards/* /src/dashboards/
 ADD     ./grafana/export-datasources-and-dashboards.sh /src/
+RUN     ./opt/grafana/bin/grafana-cli plugins install alexanderzobnin-zabbix-app
 
 # Configure nginx and supervisord
 ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
