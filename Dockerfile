@@ -90,7 +90,9 @@ RUN 	mkdir /src/datasources                                                     
 ADD     ./grafana/datasources/* /src/datasources
 ADD     ./grafana/dashboards/* /src/dashboards/
 ADD     ./grafana/export-datasources-and-dashboards.sh /src/
-RUN     /opt/grafana/bin/grafana-cli plugins install alexanderzobnin-zabbix-app
+
+# Add the zabbix datasource and dashboards
+RUN     /opt/grafana/bin/grafana-cli --pluginsDir /opt/grafana/data/plugins plugins install alexanderzobnin-zabbix-app
 
 # Configure nginx and supervisord
 ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
