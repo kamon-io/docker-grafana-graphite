@@ -91,8 +91,6 @@ ADD     ./grafana/datasources/* /src/datasources
 ADD     ./grafana/dashboards/* /src/dashboards/
 ADD     ./grafana/export-datasources-and-dashboards.sh /src/
 
-# Add the zabbix datasource and dashboards
-RUN     /opt/grafana/bin/grafana-cli --pluginsDir /opt/grafana/data/plugins plugins install alexanderzobnin-zabbix-app
 
 # Configure nginx and supervisord
 ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
@@ -124,4 +122,4 @@ EXPOSE 2003
 #   Run!   #
 # -------- #
 
-CMD     ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD     ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisor/conf.d/supervisord.conf", "/opt/grafana/bin/grafana-cli --pluginsDir /opt/grafana/data/plugins plugins install alexanderzobnin-zabbix-app"]
