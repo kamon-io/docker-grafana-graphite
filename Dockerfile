@@ -122,5 +122,8 @@ EXPOSE 2003
 #   Run!   #
 # -------- #
 
-CMD     ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisor/conf.d/supervisord.conf"]
-CMD     ["/opt/grafana/bin/grafana-cli", "--pluginsDir", "/opt/grafana/data/plugins", "plugins", "install", "alexanderzobnin-zabbix-app"]
+COPY files/run.sh /
+RUN chmod 700 /run.sh
+
+CMD ["/bin/bash", "/run.sh"]
+#CMD     ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisor/conf.d/supervisord.conf"]
