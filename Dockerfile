@@ -91,6 +91,7 @@ ADD     ./grafana/datasources/* /src/datasources
 ADD     ./grafana/dashboards/* /src/dashboards/
 ADD     ./grafana/export-datasources-and-dashboards.sh /src/
 
+
 # Configure nginx and supervisord
 ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
 RUN     mkdir /var/log/supervisor
@@ -121,4 +122,8 @@ EXPOSE 2003
 #   Run!   #
 # -------- #
 
-CMD     ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisor/conf.d/supervisord.conf"]
+COPY files/run.sh /
+RUN chmod 700 /run.sh
+
+CMD ["/bin/bash", "/run.sh"]
+#CMD     ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisor/conf.d/supervisord.conf"]
