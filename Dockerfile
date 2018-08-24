@@ -8,11 +8,11 @@ FROM   alpine
 RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca-certificates \
                                     python-dev py-pip musl-dev libffi-dev cairo supervisor bash \
                                     py-pyldap py-rrd                                                                 &&\
-        wget -q -O /etc/apk/keys/sgerrand.rsa.pub \
-                    https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub              &&\
-        wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.26-r0/glibc-2.26-r0.apk                &&\
-        apk add --no-cache  glibc-2.26-r0.apk                                                                        &&\
-        rm glibc-2.26-r0.apk                                                                                         &&\
+        apk --no-cache add ca-certificates wget                                                                      &&\
+        wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub                  &&\
+        wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk                &&\
+        apk add glibc-2.28-r0.apk                                                                                    &&\
+        rm glibc-2.28-r0.apk                                                                                         &&\
         adduser -D -u 1000 -g 'www' www                                                                              &&\
         pip install -U pip pytz gunicorn six --no-cache-dir                                                          &&\
         npm install -g wizzy                                                                                         &&\
@@ -43,7 +43,7 @@ RUN     git clone --depth=1 --branch master https://github.com/etsy/statsd.git /
 # Install Grafana
 RUN     mkdir /src/grafana                                                                                           &&\
         mkdir /opt/grafana                                                                                           &&\
-        curl https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-4.6.3.linux-x64.tar.gz \
+        curl https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.2.2.linux-amd64.tar.gz  \
              -o /src/grafana.tar.gz                                                                                  &&\
         tar -xzf /src/grafana.tar.gz -C /opt/grafana --strip-components=1                                            &&\
         rm /src/grafana.tar.gz
@@ -68,6 +68,7 @@ ADD     ./graphite/storage-schemas.conf /opt/graphite/conf/storage-schemas.conf
 ADD     ./graphite/storage-aggregation.conf /opt/graphite/conf/storage-aggregation.conf
 RUN     mkdir -p /opt/graphite/storage/whisper                                                                       &&\
         mkdir -p /opt/graphite/storage/log/webapp                                                                    &&\
+        touch /opt/graphite/storage/log/webapp/info.log                                                              &&\
         touch /opt/graphite/storage/graphite.db /opt/graphite/storage/index                                          &&\
         chown -R www /opt/graphite/storage                                                                           &&\
         chmod 0775 /opt/graphite/storage /opt/graphite/storage/whisper                                               &&\
