@@ -14,7 +14,7 @@ RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca
         apk add glibc-2.28-r0.apk                                                                                    &&\
         rm glibc-2.28-r0.apk                                                                                         &&\
         adduser -D -u 1000 -g 'www' www                                                                              &&\
-        pip install -U pip pytz gunicorn six --no-cache-dir                                                          &&\
+        pip install -U pip pytz gunicorn six                                                                         &&\
         npm install -g wizzy                                                                                         &&\
         npm cache clean --force
 
@@ -22,19 +22,19 @@ RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca
 RUN     mkdir /src                                                                                                   &&\
         git clone --depth=1 --branch master https://github.com/graphite-project/whisper.git /src/whisper             &&\
         cd /src/whisper                                                                                              &&\
-        pip install . --no-cache-dir                                                                                 &&\
+        pip install .                                                                                                &&\
         python setup.py install
 
 RUN     git clone --depth=1 --branch master https://github.com/graphite-project/carbon.git /src/carbon               &&\
         cd /src/carbon                                                                                               &&\
-        pip install . --no-cache-dir                                                                                 &&\
+        pip install .                                                                                                &&\
         python setup.py install
 
 RUN     git clone --depth=1 --branch master https://github.com/graphite-project/graphite-web.git /src/graphite-web   &&\
         cd /src/graphite-web                                                                                         &&\
-        pip install . --no-cache-dir                                                                                 &&\
+        pip install .                                                                                                &&\
         python setup.py install                                                                                      &&\
-        pip install -r requirements.txt --no-cache-dir                                                               &&\
+        pip install -r requirements.txt                                                                              &&\
         python check-dependencies.py
 
 # Install StatsD
