@@ -5,37 +5,40 @@ FROM   alpine
 # ---------------- #
 
 # Install all prerequisites
-RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca-certificates \
-                                    python-dev py-pip musl-dev libffi-dev cairo supervisor bash \
-                                    py-pyldap py-rrd                                                                 &&\
+RUN     apk add --update --no-cache nginx nodejs npm git curl wget gcc ca-certificates \
+                                    py3-pip musl-dev libffi-dev cairo supervisor bash \
+                                    py3-pyldap python3-dev                                                           &&\
         apk --no-cache add ca-certificates wget                                                                      &&\
         wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub                  &&\
         wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk                &&\
         apk add glibc-2.28-r0.apk                                                                                    &&\
         rm glibc-2.28-r0.apk                                                                                         &&\
         adduser -D -u 1000 -g 'www' www                                                                              &&\
-        pip install -U pip pytz gunicorn six                                                                         &&\
+        ln -sf python3 /usr/bin/python                                                                               &&\
+        python3 -m ensurepip                                                                                         &&\
+        python3 -m pip install -U pip pytz gunicorn six wheel                                                        &&\
         npm install -g wizzy                                                                                         &&\
         npm cache clean --force
+
 
 # Checkout the master branches of Graphite, Carbon and Whisper and install from there
 RUN     mkdir /src                                                                                                   &&\
         git clone --depth=1 --branch master https://github.com/graphite-project/whisper.git /src/whisper             &&\
         cd /src/whisper                                                                                              &&\
-        pip install .                                                                                                &&\
-        python setup.py install
+        python3 -m pip install .                                                                                     &&\
+        python3 setup.py install
 
 RUN     git clone --depth=1 --branch master https://github.com/graphite-project/carbon.git /src/carbon               &&\
         cd /src/carbon                                                                                               &&\
-        pip install .                                                                                                &&\
-        python setup.py install
+        python3 -m pip install .                                                                                     &&\
+        python3 setup.py install
 
 RUN     git clone --depth=1 --branch master https://github.com/graphite-project/graphite-web.git /src/graphite-web   &&\
         cd /src/graphite-web                                                                                         &&\
-        pip install .                                                                                                &&\
-        python setup.py install                                                                                      &&\
-        pip install -r requirements.txt                                                                              &&\
-        python check-dependencies.py
+        python3 -m pip install .                                                                                     &&\
+        python3 setup.py install                                                                                     &&\
+        python3 -m pip install -r requirements.txt                                                                   &&\
+        python3 check-dependencies.py
 
 # Install StatsD
 RUN     git clone --depth=1 --branch master https://github.com/etsy/statsd.git /src/statsd
@@ -43,14 +46,13 @@ RUN     git clone --depth=1 --branch master https://github.com/etsy/statsd.git /
 # Install Grafana
 RUN     mkdir /src/grafana                                                                                           &&\
         mkdir /opt/grafana                                                                                           &&\
-        curl https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.2.2.linux-amd64.tar.gz  \
-             -o /src/grafana.tar.gz                                                                                  &&\
+        curl -L https://dl.grafana.com/oss/release/grafana-8.4.2.linux-amd64.tar.gz -o /src/grafana.tar.gz           &&\
         tar -xzf /src/grafana.tar.gz -C /opt/grafana --strip-components=1                                            &&\
         rm /src/grafana.tar.gz
 
 
 # Cleanup Compile Dependencies
-RUN     apk del --no-cache git curl wget gcc python-dev musl-dev libffi-dev
+#RUN     apk del --no-cache git curl wget gcc python3-dev musl-dev libffi-dev
 
 
 # ----------------- #
@@ -94,7 +96,8 @@ ADD     ./grafana/export-datasources-and-dashboards.sh /src/
 
 # Configure nginx and supervisord
 ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
-RUN     mkdir /var/log/supervisor
+RUN     mkdir /var/log/supervisor /var/tmp/nginx                                                                      &&\
+        chown www.www -R /var/tmp/nginx
 ADD     ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 
